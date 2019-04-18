@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A27D926226859F1000CB3C1 /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A27D925226859F1000CB3C1 /* SearchResultsTableViewController.swift */; };
+		2A27D92A22685A83000CB3C1 /* SearchResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A27D92922685A83000CB3C1 /* SearchResultsTableViewCell.swift */; };
 		2A5381C8226513F6005BCA5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5381C7226513F6005BCA5F /* AppDelegate.swift */; };
 		2A5381CA226513F6005BCA5F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5381C9226513F6005BCA5F /* ViewController.swift */; };
 		2A5381CD226513F6005BCA5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A5381CB226513F6005BCA5F /* Main.storyboard */; };
 		2A5381CF226513F8005BCA5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A5381CE226513F8005BCA5F /* Assets.xcassets */; };
 		2A5381D2226513F8005BCA5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A5381D0226513F8005BCA5F /* LaunchScreen.storyboard */; };
 		2A5381DD226513F8005BCA5F /* csci571HW9Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5381DC226513F8005BCA5F /* csci571HW9Tests.swift */; };
+		2AF5965522685E0A001835CE /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF5965422685E0A001835CE /* Item.swift */; };
 		63EB49471D9721E1DD93E22B /* Pods_csci571HW9Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9097A631BC5684F457E42A91 /* Pods_csci571HW9Tests.framework */; };
 		CA9BEFB976F8E0B0CA9EB56B /* Pods_csci571HW9.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F320C4D91A70E5F07743EB8 /* Pods_csci571HW9.framework */; };
 		DD029F37B37B3D480A575D9D /* Pods_csci571HW9_csci571HW9Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A83BC4BD6EE36F52B09E5F1 /* Pods_csci571HW9_csci571HW9Tests.framework */; };
@@ -31,6 +34,8 @@
 /* Begin PBXFileReference section */
 		0DA3801DCAC6FD6682B8C8D2 /* Pods-csci571HW9Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-csci571HW9Tests.release.xcconfig"; path = "Target Support Files/Pods-csci571HW9Tests/Pods-csci571HW9Tests.release.xcconfig"; sourceTree = "<group>"; };
 		120080A95D67C72BF503A506 /* Pods-csci571HW9.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-csci571HW9.debug.xcconfig"; path = "Target Support Files/Pods-csci571HW9/Pods-csci571HW9.debug.xcconfig"; sourceTree = "<group>"; };
+		2A27D925226859F1000CB3C1 /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
+		2A27D92922685A83000CB3C1 /* SearchResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewCell.swift; sourceTree = "<group>"; };
 		2A5381C4226513F6005BCA5F /* csci571HW9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = csci571HW9.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A5381C7226513F6005BCA5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A5381C9226513F6005BCA5F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +46,7 @@
 		2A5381D8226513F8005BCA5F /* csci571HW9Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = csci571HW9Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A5381DC226513F8005BCA5F /* csci571HW9Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = csci571HW9Tests.swift; sourceTree = "<group>"; };
 		2A5381DE226513F8005BCA5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2AF5965422685E0A001835CE /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		2F139AD6F2AA057031433FC1 /* Pods-csci571HW9Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-csci571HW9Tests.debug.xcconfig"; path = "Target Support Files/Pods-csci571HW9Tests/Pods-csci571HW9Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		7A83BC4BD6EE36F52B09E5F1 /* Pods_csci571HW9_csci571HW9Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_csci571HW9_csci571HW9Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F320C4D91A70E5F07743EB8 /* Pods_csci571HW9.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_csci571HW9.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +102,9 @@
 			children = (
 				2A5381C7226513F6005BCA5F /* AppDelegate.swift */,
 				2A5381C9226513F6005BCA5F /* ViewController.swift */,
+				2A27D925226859F1000CB3C1 /* SearchResultsTableViewController.swift */,
+				2AF5965422685E0A001835CE /* Item.swift */,
+				2A27D92922685A83000CB3C1 /* SearchResultsTableViewCell.swift */,
 				2A5381CB226513F6005BCA5F /* Main.storyboard */,
 				2A5381CE226513F8005BCA5F /* Assets.xcassets */,
 				2A5381D0226513F8005BCA5F /* LaunchScreen.storyboard */,
@@ -290,6 +299,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-csci571HW9/Pods-csci571HW9-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireSwiftyJSON/AlamofireSwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/McPicker/McPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSpinner/SwiftSpinner.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -300,6 +310,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireSwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/McPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSpinner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -317,8 +328,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A27D92A22685A83000CB3C1 /* SearchResultsTableViewCell.swift in Sources */,
+				2A27D926226859F1000CB3C1 /* SearchResultsTableViewController.swift in Sources */,
 				2A5381CA226513F6005BCA5F /* ViewController.swift in Sources */,
 				2A5381C8226513F6005BCA5F /* AppDelegate.swift in Sources */,
+				2AF5965522685E0A001835CE /* Item.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -5,7 +5,9 @@ target 'csci571HW9' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   pod 'SwiftyJSON', '~> 4.0'
-  pod 'Alamofire', '~> 5.0.0-beta.5'
+  # pod 'Alamofire', '~> 5.0.0-beta.5'
+  pod 'Alamofire', '~> 4.0'
+  pod 'AlamofireSwiftyJSON'
   pod 'McPicker', '~> 2.0.0'
   pod 'Toast-Swift', '~> 5.0.0'
   pod "SwiftSpinner"

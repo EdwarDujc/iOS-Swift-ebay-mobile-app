@@ -10,6 +10,9 @@ import UIKit
 import McPicker
 import SwiftSpinner
 import Toast_Swift
+import Alamofire
+import SwiftyJSON
+import AlamofireSwiftyJSON
 
 class ViewController: UIViewController, UITextFieldDelegate {
     //MARK: outlets
@@ -33,7 +36,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var condUnspecChecked = false
     var shipPickupChecked = false
     var shipFreeChecked = false
-    var hereZipcode = "90007"
+    var hereZipcode = "00000"
     
     let category_option:[[String]] = [["All Categories", "Art", "Baby", "Books", "Clothing, Shoes & Accessories", "Computers/Tablets & Networking", "Health & Beauty", "Music", "Video Games & Consoles"]]
     
@@ -52,6 +55,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         
+        // TEST ONLY! REMOVE!
+        self.keyword.text = "iphone"
+        
         // Category
         let mcInputView = McPicker(data: category_option)
         category.text="All Categories"
@@ -63,8 +69,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         // Location
         customLocationSwitch.isOn = false
-        userZipcode.isEnabled = false
+        userZipcode.isHidden = true
         distance.placeholder = "10"
+        
+        Alamofire.request(URLRequest(url: URL(string:"http://ip-api.com/json")! )).responseSwiftyJSON{
+            response in
+            if let result = response.result.value {
+                self.hereZipcode = String(describing: result["zip"])
+            }
+        }
         
         // Buttons
         searchButton.layer.cornerRadius = 5
@@ -79,60 +92,60 @@ class ViewController: UIViewController, UITextFieldDelegate {
     //MARK: Actions, checkbox
     @IBAction func condNewCheckAction(_ sender: Any) {
         if (!condNewChecked){
-            condNewCheckbox.setImage(UIImage(named: "markedCheckbox") , for: UIControl.State.normal)
+            condNewCheckbox.setImage(UIImage(named: "checked") , for: UIControl.State.normal)
             condNewChecked = true
         }
         else {
-            condNewCheckbox.setImage(UIImage(named: "emptyCheckbox") , for: UIControl.State.normal)
+            condNewCheckbox.setImage(UIImage(named: "unchecked") , for: UIControl.State.normal)
             condNewChecked = false
         }
     }
     @IBAction func condUsedCheckAction(_ sender: Any) {
         if (!condUsedChecked){
-            condUsedCheckbox.setImage(UIImage(named: "markedCheckbox") , for: UIControl.State.normal)
+            condUsedCheckbox.setImage(UIImage(named: "checked") , for: UIControl.State.normal)
             condUsedChecked = true
         }
         else {
-            condUsedCheckbox.setImage(UIImage(named: "emptyCheckbox") , for: UIControl.State.normal)
+            condUsedCheckbox.setImage(UIImage(named: "unchecked") , for: UIControl.State.normal)
             condUsedChecked = false
         }
     }
     @IBAction func condUnspecCheckAction(_ sender: Any) {
         if (!condUnspecChecked){
-            condUnspecCheckbox.setImage(UIImage(named: "markedCheckbox") , for: UIControl.State.normal)
+            condUnspecCheckbox.setImage(UIImage(named: "checked") , for: UIControl.State.normal)
             condUnspecChecked = true
         }
         else {
-            condUnspecCheckbox.setImage(UIImage(named: "emptyCheckbox") , for: UIControl.State.normal)
+            condUnspecCheckbox.setImage(UIImage(named: "unchecked") , for: UIControl.State.normal)
             condUnspecChecked = false
         }
     }
     @IBAction func shipPickupCheckAction(_ sender: Any) {
         if (!shipPickupChecked){
-            shipPickupCheckbox.setImage(UIImage(named: "markedCheckbox") , for: UIControl.State.normal)
+            shipPickupCheckbox.setImage(UIImage(named: "checked") , for: UIControl.State.normal)
             shipPickupChecked = true
         }
         else {
-            shipPickupCheckbox.setImage(UIImage(named: "emptyCheckbox") , for: UIControl.State.normal)
+            shipPickupCheckbox.setImage(UIImage(named: "unchecked") , for: UIControl.State.normal)
             shipPickupChecked = false
         }
     }
     @IBAction func shipFreeCheckAction(_ sender: Any) {
         if (!shipFreeChecked){
-            shipFreeCheckbox.setImage(UIImage(named: "markedCheckbox") , for: UIControl.State.normal)
+            shipFreeCheckbox.setImage(UIImage(named: "checked") , for: UIControl.State.normal)
             shipFreeChecked = true
         }
         else {
-            shipFreeCheckbox.setImage(UIImage(named: "emptyCheckbox") , for: UIControl.State.normal)
+            shipFreeCheckbox.setImage(UIImage(named: "unchecked") , for: UIControl.State.normal)
             shipFreeChecked = false
         }
     }
     @IBAction func customLocationSwitchAction(_ sender: UISwitch) {
         if(sender.isOn){
-            userZipcode.isEnabled = true
+            userZipcode.isHidden = false
         }
         else {
-            userZipcode.isEnabled = false
+            userZipcode.isHidden = true
         }
     }
     
@@ -147,7 +160,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
             DisplayMessage(m: "Keyword Is Mandatory")
             return ;
         }
-//        SwiftSpinner.show("Searching...")
+        if(customLocationSwitch.isOn){
+            userZipcode.text=userZipcode.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            if(userZipcode.text==""){
+                DisplayMessage(m: "Zipcode Is Mandatory")
+                return ;
+            }
+        }
         var url = "http://csci571-jincheng-nodejs.us-east-2.elasticbeanstalk.com/search?"
         // keyword
         url = url + "keyword=";
@@ -224,28 +243,27 @@ class ViewController: UIViewController, UITextFieldDelegate {
         url += userZipcode.text!
         
         print(url)
-        //        http://csci571-jincheng-nodejs.us-east-2.elasticbeanstalk.com/search?keyword=iphone&category=all_categories&condition_new=true&condition_used=true&condition_unspecified=true&shipping_local=true&shipping_free=true&distance=123&zipcodeCustom=true&hereZipcode=90007&userZipcode=90007
-        //http://csci571-jincheng-nodejs.us-east-2.elasticbeanstalk.com/search?keyword=iphone&category=all_categories&condition_new=false&condition_used=false&condition_unspecified=false&shipping_local=false&shipping_free=false&distance=10&zipcodeCustom=false&hereZipcode=90007&userZipcode=
+//        SwiftSpinner.show("Searching...")
         
     }
     @IBAction func clearButtonAction(_ sender: Any) {
         keyword.text = ""
         category.text = "All Categories"
         condNewChecked = false
-        condNewCheckbox.setImage(UIImage(named: "emptyCheckbox") , for: UIControl.State.normal)
+        condNewCheckbox.setImage(UIImage(named: "unchecked") , for: UIControl.State.normal)
         condUsedChecked = false
-        condUsedCheckbox.setImage(UIImage(named: "emptyCheckbox") , for: UIControl.State.normal)
+        condUsedCheckbox.setImage(UIImage(named: "unchecked") , for: UIControl.State.normal)
         condUnspecChecked = false
-        condUnspecCheckbox.setImage(UIImage(named: "emptyCheckbox") , for: UIControl.State.normal)
+        condUnspecCheckbox.setImage(UIImage(named: "unchecked") , for: UIControl.State.normal)
         shipPickupChecked = false
-        shipPickupCheckbox.setImage(UIImage(named: "emptyCheckbox") , for: UIControl.State.normal)
+        shipPickupCheckbox.setImage(UIImage(named: "unchecked") , for: UIControl.State.normal)
         shipFreeChecked = false
-        shipFreeCheckbox.setImage(UIImage(named: "emptyCheckbox") , for: UIControl.State.normal)
+        shipFreeCheckbox.setImage(UIImage(named: "unchecked") , for: UIControl.State.normal)
         distance.placeholder = "10"
         distance.text = ""
         customLocationSwitch.isOn = false
         userZipcode.text = ""
-        userZipcode.isEnabled = false
+        userZipcode.isHidden = true
     }
     
 }
