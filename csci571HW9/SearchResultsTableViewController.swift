@@ -7,18 +7,21 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireSwiftyJSON
+import SwiftyJSON
+import Toast_Swift
 
 class SearchResultsTableViewController: UITableViewController {
     
     var products = [Item]()
+    var searchResultsJson:JSON!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.tableView.register(SearchResultsTableViewCell.self, forCellReuseIdentifier: "SearchCell");
-
-        
-        loadSampleProducts()
+//        loadSampleProducts()
+        loadProducts()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -93,15 +96,18 @@ class SearchResultsTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        // Get the new view controller using segue.destination.
+//        // Pass the selected object to the new view controller.
+//        if let vc1 = segue.destination as? SearchResultsTableViewController {
+//            vc1.searchResultsJson = self.searchResultsJson
+//        }
+//    }
+//
     
     private func loadSampleProducts(){
         let photo1 = UIImage(named: "trojan")
@@ -120,10 +126,65 @@ class SearchResultsTableViewController: UITableViewController {
             fatalError("Unable to instantiate product 3")
         }
         
-        products.append(product1)
-        products.append(product2)
-        products.append(product3)
-        //products += [product1, product2, product3]
+//        products.append(product1)
+//        products.append(product2)
+//        products.append(product3)
+        products += [product1, product2, product3]
+    }
+    
+    private func loadProducts(){
+//        print("search results in SearchResultsTableViewController.swift: ", self.searchResultsJson)
+        for index in 1...self.searchResultsJson["findItemsAdvancedResponse"][0]["searchResult"][0]["item"].count - 1{
+            let item = self.searchResultsJson["findItemsAdvancedResponse"][0]["searchResult"][0]["item"][index]
+            
+//            print("photo url: ", item["galleryURL"][0])
+            
+            let galleryURL = item["galleryURL"][0].string ?? "N.A."
+            var photo: UIImage?
+            if (galleryURL != "N.A."){
+                let imageUrl = URL(string: galleryURL)!
+                let imageData = try! Data(contentsOf: imageUrl)
+                photo = UIImage(data: imageData) ?? UIImage(named: "trojan")
+            } else {
+                photo = UIImage(named: "trojan")
+            }
+            
+            
+            let title = item["title"][0].string ?? "N.A."
+            var price = "$"
+            price += item["sellingStatus"][0]["currentPrice"][0]["__value__"].string ?? "N.A."
+            var shipping = item["shippingInfo"][0]["shippingServiceCost"][0]["__value__"].string ?? "N.A."
+            if (shipping == "0.0"){
+                shipping = "FREE SHIPPING"
+            }
+            let zipcode = item["postalCode"][0].string ?? "N.A."
+            let condition_id = item["condition"][0]["conditionId"][0].string ?? "N.A."
+            var condition = "NA"
+            switch condition_id {
+            case "1000":
+                condition = "NEW"
+            case "2000":
+                condition = "REFURBISHED"
+            case "2500":
+                condition = "REFURBISHED"
+            case "3000":
+                condition = "USED"
+            case "4000":
+                condition = "USED"
+            case "5000":
+                condition = "USED"
+            case "6000":
+                condition = "USED"
+            default:
+                condition = "NA"
+            }
+            
+            guard let product = Item(title: title, price: price, shipping: shipping, zipcode: zipcode, condition: condition, photo: photo!) else {
+                fatalError("Unable to instantiate product 1")
+            }
+            
+            products.append(product)
+        }
     }
 
 }

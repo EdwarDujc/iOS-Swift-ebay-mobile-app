@@ -37,6 +37,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var shipPickupChecked = false
     var shipFreeChecked = false
     var hereZipcode = "00000"
+    var searchResultsJson: JSON?
     
     let category_option:[[String]] = [["All Categories", "Art", "Baby", "Books", "Clothing, Shoes & Accessories", "Computers/Tablets & Networking", "Health & Beauty", "Music", "Video Games & Consoles"]]
     
@@ -52,6 +53,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
             break
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+                // Get the new view controller using segue.destination.
+                // Pass the selected object to the new view controller.
+                if let vc1 = segue.destination as? SearchResultsTableViewController {
+                    vc1.searchResultsJson = self.searchResultsJson
+                }
+            }
     
     override func viewDidLoad() {
         
@@ -243,9 +252,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
         url += userZipcode.text!
         
         print(url)
-//        SwiftSpinner.show("Searching...")
-        
+        SwiftSpinner.show("Searching...")
+        Alamofire.request(URLRequest(url: URL(string: url)! )).responseSwiftyJSON{
+            response in
+            SwiftSpinner.hide()
+            if let result = response.result.value {
+                self.searchResultsJson = result
+//                print("searchResultsJson in ViewController: ", self.searchResultsJson)
+                self.performSegue(withIdentifier: "mainToResults", sender: nil)
+            }
+        }
     }
+        
     @IBAction func clearButtonAction(_ sender: Any) {
         keyword.text = ""
         category.text = "All Categories"

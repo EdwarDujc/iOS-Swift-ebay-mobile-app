@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Qo-ne-7ZR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TLx-m8-xrd">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -229,13 +229,14 @@
                         <outlet property="shipFreeCheckbox" destination="tqd-Xu-djH" id="MsL-ua-0PK"/>
                         <outlet property="shipPickupCheckbox" destination="mPk-YF-bB4" id="sSO-rB-cDG"/>
                         <outlet property="userZipcode" destination="aKJ-h9-sp6" id="xxF-4O-WJL"/>
+                        <segue destination="9Qo-ne-7ZR" kind="show" identifier="mainToResults" id="xTz-Az-mXI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1047.8260869565217" y="138.61607142857142"/>
+            <point key="canvasLocation" x="1071" y="102"/>
         </scene>
-        <!--Search Results Table View Controller-->
+        <!--Search Results-->
         <scene sceneID="zdS-Sw-df4">
             <objects>
                 <tableViewController id="9Qo-ne-7ZR" customClass="SearchResultsTableViewController" customModule="csci571HW9" customModuleProvider="target" sceneMemberID="viewController">
@@ -314,6 +315,7 @@
                             <outlet property="delegate" destination="9Qo-ne-7ZR" id="ezf-6i-B28"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Search Results" id="AS6-qc-xdF"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HyG-HE-FJk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
