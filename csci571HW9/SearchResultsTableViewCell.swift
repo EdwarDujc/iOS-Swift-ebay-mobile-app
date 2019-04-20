@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toast_Swift
 
 class SearchResultsTableViewCell: UITableViewCell {
 
@@ -19,6 +20,18 @@ class SearchResultsTableViewCell: UITableViewCell {
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var wishButton: UIButton!
     
+    var isInCart = false
+    
+    @IBAction func wishButtonAction(_ sender: UIButton) {
+//        print("wish button clicked")
+        if (self.isInCart){
+            self.isInCart = false
+            wishButton.setImage(UIImage(named: "wishListEmpty") , for: UIControl.State.normal)
+        } else {
+            self.isInCart = true
+            wishButton.setImage(UIImage(named: "wishListFilled") , for: UIControl.State.normal)
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

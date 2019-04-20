@@ -19,8 +19,7 @@ class SearchResultsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        loadSampleProducts()
+    self.navigationController!.navigationBar.topItem!.title = ""
         loadProducts()
 
         // Uncomment the following line to preserve selection between presentations
@@ -55,6 +54,7 @@ class SearchResultsTableViewController: UITableViewController {
         cell.zipcodeLabel.text = product.zipcode
         cell.conditionLabel.text = product.condition
         cell.photoImageView.image = product.photo
+//        cell.wishButton = product.wishButton
 
         return cell
     }
@@ -99,54 +99,44 @@ class SearchResultsTableViewController: UITableViewController {
     
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        // Get the new view controller using segue.destination.
-//        // Pass the selected object to the new view controller.
-//        if let vc1 = segue.destination as? SearchResultsTableViewController {
-//            vc1.searchResultsJson = self.searchResultsJson
-//        }
-//    }
-//
-    
-    private func loadSampleProducts(){
-        let photo1 = UIImage(named: "trojan")
-        let photo2 = UIImage(named: "trojan")
-        let photo3 = UIImage(named: "trojan")
-        
-        guard let product1 = Item(title: "p1", price: "$1", shipping: "free", zipcode: "90007", condition: "new", photo: photo1!) else {
-            fatalError("Unable to instantiate product 1")
+//     In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        if let vc1 = segue.destination as? TabBarViewController  {
+            guard let selectedCell = sender as? SearchResultsTableViewCell else {
+                fatalError("Unexpected sender: \(sender)")
+            }
+            guard let indexPath = tableView.indexPath(for: selectedCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            vc1.product = self.products[indexPath.row]
+//            print("product in SearchResultsTableViewController: ", self.products[indexPath.row].title)
         }
-        
-        guard let product2 = Item(title: "p2", price: "$2", shipping: "local pickup", zipcode: "90008", condition: "used", photo: photo2!) else {
-            fatalError("Unable to instantiate product 2")
-        }
-        
-        guard let product3 = Item(title: "p3", price: "$3", shipping: "free", zipcode: "90009", condition: "unspecified", photo: photo3!) else {
-            fatalError("Unable to instantiate product 3")
-        }
-        
-//        products.append(product1)
-//        products.append(product2)
-//        products.append(product3)
-        products += [product1, product2, product3]
     }
     
     private func loadProducts(){
-//        print("search results in SearchResultsTableViewController.swift: ", self.searchResultsJson)
-        for index in 1...self.searchResultsJson["findItemsAdvancedResponse"][0]["searchResult"][0]["item"].count - 1{
+        var total_num = 0
+        total_num = self.searchResultsJson["findItemsAdvancedResponse"][0]["searchResult"][0]["item"].count
+        
+//        print("total_num: ", total_num)
+        if (total_num == 0) {
+            showAlert(Title: "No Results", Message: "Failed to fetch search results")
+            return
+        }
+
+        for index in 0...total_num - 1{
             let item = self.searchResultsJson["findItemsAdvancedResponse"][0]["searchResult"][0]["item"][index]
             
-//            print("photo url: ", item["galleryURL"][0])
-            
+            let id = item["itemId"][0].string ?? ""
             let galleryURL = item["galleryURL"][0].string ?? "N.A."
             var photo: UIImage?
             if (galleryURL != "N.A."){
                 let imageUrl = URL(string: galleryURL)!
                 let imageData = try! Data(contentsOf: imageUrl)
-                photo = UIImage(data: imageData) ?? UIImage(named: "trojan")
+                photo = UIImage(data: imageData) ?? UIImage(named: "defaultImage")
             } else {
-                photo = UIImage(named: "trojan")
+                photo = UIImage(named: "defaultImage")
             }
             
             
@@ -159,7 +149,7 @@ class SearchResultsTableViewController: UITableViewController {
             }
             let zipcode = item["postalCode"][0].string ?? "N.A."
             let condition_id = item["condition"][0]["conditionId"][0].string ?? "N.A."
-            var condition = "NA"
+            var condition = "N.A."
             switch condition_id {
             case "1000":
                 condition = "NEW"
@@ -176,15 +166,34 @@ class SearchResultsTableViewController: UITableViewController {
             case "6000":
                 condition = "USED"
             default:
-                condition = "NA"
+                condition = "N.A."
             }
             
-            guard let product = Item(title: title, price: price, shipping: shipping, zipcode: zipcode, condition: condition, photo: photo!) else {
+            let wishButton = UIButton()
+            wishButton.addTarget(self, action: "pressed", for: .touchUpInside)
+            
+            func pressed(sender: UIButton!) {
+                print("wish button clicked")
+            }
+
+            
+            guard let product = Item(id: id, title: title, price: price, shipping: shipping, zipcode: zipcode, condition: condition, photo: photo!, wishButton: wishButton, isInCart: false) else {
                 fatalError("Unable to instantiate product 1")
             }
             
             products.append(product)
         }
+    }
+    
+    private func showAlert(Title: String, Message: String){
+        // create the alert
+        let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in self.performSegue(withIdentifier: "unwindSegueToVC1", sender: nil)
+        }))
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
     }
 
 }

@@ -251,7 +251,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         url += "&userZipcode="
         url += userZipcode.text!
         
-        print(url)
+//        print(url)
         SwiftSpinner.show("Searching...")
         Alamofire.request(URLRequest(url: URL(string: url)! )).responseSwiftyJSON{
             response in
@@ -284,5 +284,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         userZipcode.isHidden = true
     }
     
+    @IBAction func unwindToVC1(segue:UIStoryboardSegue) { }
 }
 

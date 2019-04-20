@@ -9,21 +9,25 @@
 import UIKit
 class Item {
     // Properties
+    var id: String
     var title: String
     var price: String
     var shipping: String
     var zipcode: String
     var condition: String
     var photo: UIImage
-//    var wishButton: UIButton
+    var wishButton: UIButton
+    var isInCart: Bool
     
-    init?(title: String, price: String, shipping: String, zipcode: String, condition: String, photo: UIImage) {
+    init?(id: String, title: String, price: String, shipping: String, zipcode: String, condition: String, photo: UIImage, wishButton: UIButton, isInCart: Bool) {
+        self.id = id
         self.title = title
         self.price = price
         self.shipping = shipping
         self.zipcode = zipcode
         self.condition = condition
         self.photo = photo
-//        self.wishButton = wishButton
+        self.wishButton = wishButton
+        self.isInCart = isInCart
     }
 }
