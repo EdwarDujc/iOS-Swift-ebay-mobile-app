@@ -13,17 +13,21 @@ import Alamofire
 import SwiftyJSON
 import AlamofireSwiftyJSON
 
-class InfoViewController: UIViewController, UIScrollViewDelegate {
+class InfoViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate  {
     
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var price: UILabel!
+    @IBOutlet weak var descriptionTableView: UITableView!
     
     var productSearch: Item!
     var images: [String] = []
     var detailsJson: JSON!
     var frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+    
+    var sampleDescription = ["k1", "k2", "k3"]
+    var Description : [(Name: String, Value: String)] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +38,9 @@ class InfoViewController: UIViewController, UIScrollViewDelegate {
         name.text = productSearch.title
         price.text = productSearch.price
         
+        // photos
         let url = "http://csci571-jincheng-nodejs.us-east-2.elasticbeanstalk.com/details?itemId=" + productSearch.id
-//        print(url)
-
+        //        print(url)
         SwiftSpinner.show("Fetching Product Details...")
         Alamofire.request(URLRequest(url: URL(string: url)! )).responseSwiftyJSON{
             response in
@@ -47,52 +51,89 @@ class InfoViewController: UIViewController, UIScrollViewDelegate {
                     let picUrl = result["Item"]["PictureURL"][index].string ?? ""
                     self.images.append(picUrl)
                 }
-
+                
                 self.pageControl.numberOfPages = self.images.count
                 for index in 0..<self.images.count {
                     self.frame.origin.x = self.scrollView.frame.size.width * CGFloat(index)
                     self.frame.size = self.scrollView.frame.size
-
+                    
                     let imgView = UIImageView(frame: self.frame)
                     //            imgView.image = UIImage(named: images[index])
                     let imageUrl = URL(string: self.images[index])!
                     let imageData = try! Data(contentsOf: imageUrl)
                     let photo = UIImage(data: imageData) ?? UIImage(named: "defaultImage")
-
+                    
                     imgView.image = photo
                     self.scrollView.addSubview(imgView)
                 }
                 self.scrollView.contentSize = CGSize(width: (self.scrollView.frame.size.width * CGFloat(self.images.count)), height: self.scrollView.frame.size.height)
                 self.scrollView.delegate = self
-                
             }
         }
         
-//        photos
         pageControl.numberOfPages = images.count
         for index in 0..<images.count {
             frame.origin.x = scrollView.frame.size.width * CGFloat(index)
             frame.size = scrollView.frame.size
-
+            
             let imgView = UIImageView(frame: frame)
             //            imgView.image = UIImage(named: images[index])
             let imageUrl = URL(string: images[index])!
             let imageData = try! Data(contentsOf: imageUrl)
             let photo = UIImage(data: imageData) ?? UIImage(named: "defaultImage")
-
+            
             imgView.image = photo
             self.scrollView.addSubview(imgView)
         }
         scrollView.contentSize = CGSize(width: (scrollView.frame.size.width * CGFloat(images.count)), height: scrollView.frame.size.height)
         scrollView.delegate = self
         
+//         description table
+        for index in 0...detailsJson["Item"]["ItemSpecifics"]["NameValueList"].count - 1 {
+            let pair = detailsJson["Item"]["ItemSpecifics"]["NameValueList"][index]
+            let name = pair["Name"].string ?? "N.A."
+            let value = pair["Value"][0].string ?? "N.A."
+            Description += [(Name: name, Value: value)]
+        }
+        
     }
-    
+ 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         var pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
         pageControl.currentPage = Int(pageNumber)
     }
 
+    
+    // MARK: description table
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sampleDescription.count
+        
+//        guard let data = self.detailsJson?["Item"]["ItemSpecifics"]["NameValueList"] else { print("return 0"); return 0 }
+//        print("return ", data.count)
+//        return data.count
+        
+//        return Description.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = descriptionTableView.dequeueReusableCell(withIdentifier: "descriptionCell", for: indexPath)
+        
+        let line = sampleDescription[indexPath.row]
+        cell.textLabel?.text = line
+        cell.detailTextLabel?.text = line+"233"
+        
+//        let line = Description[indexPath.row]
+//        let (key, value) = line
+//        cell.textLabel?.text = key
+//        cell.detailTextLabel?.text = value
+        
+        return cell
+    }
+    
     /*
     // MARK: - Navigation
 
