@@ -416,18 +416,18 @@
                     <connections>
                         <segue destination="Vab-M7-ABZ" kind="relationship" relationship="viewControllers" id="tX1-bw-2Wc"/>
                         <segue destination="YyC-iO-K3f" kind="relationship" relationship="viewControllers" id="aaV-iT-gCC"/>
-                        <segue destination="lWM-B9-lB7" kind="relationship" relationship="viewControllers" id="yL4-nw-7am"/>
                         <segue destination="wfY-ww-h2j" kind="relationship" relationship="viewControllers" id="zIV-ZV-sym"/>
+                        <segue destination="lWM-B9-lB7" kind="relationship" relationship="viewControllers" id="yL4-nw-7am"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dDg-cr-Gfn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2906" y="102"/>
         </scene>
-        <!--SimilarTab-->
+        <!--similarTab-->
         <scene sceneID="YUE-Zi-9Yf">
             <objects>
-                <viewController title="SimilarTab" id="lWM-B9-lB7" sceneMemberID="viewController">
+                <viewController title="similarTab" id="lWM-B9-lB7" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gie-Op-QVa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -440,10 +440,10 @@
             </objects>
             <point key="canvasLocation" x="3714" y="875"/>
         </scene>
-        <!--photosTab-->
+        <!--photoTab-->
         <scene sceneID="xM8-lh-OKv">
             <objects>
-                <viewController title="photosTab" id="wfY-ww-h2j" sceneMemberID="viewController">
+                <viewController title="photoTab" id="wfY-ww-h2j" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7xX-HF-ngc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -454,7 +454,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xbq-KT-kej" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4929" y="268"/>
+            <point key="canvasLocation" x="4823" y="296"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tjE-du-1ii">

@@ -35,7 +35,7 @@ class InfoViewController: UIViewController, UIScrollViewDelegate {
         price.text = productSearch.price
         
         let url = "http://csci571-jincheng-nodejs.us-east-2.elasticbeanstalk.com/details?itemId=" + productSearch.id
-        print(url)
+//        print(url)
 
         SwiftSpinner.show("Fetching Product Details...")
         Alamofire.request(URLRequest(url: URL(string: url)! )).responseSwiftyJSON{
