@@ -71,23 +71,6 @@ class InfoViewController: UIViewController, UIScrollViewDelegate, UITableViewDat
             }
         }
         
-        pageControl.numberOfPages = images.count
-        for index in 0..<images.count {
-            frame.origin.x = scrollView.frame.size.width * CGFloat(index)
-            frame.size = scrollView.frame.size
-            
-            let imgView = UIImageView(frame: frame)
-            //            imgView.image = UIImage(named: images[index])
-            let imageUrl = URL(string: images[index])!
-            let imageData = try! Data(contentsOf: imageUrl)
-            let photo = UIImage(data: imageData) ?? UIImage(named: "defaultImage")
-            
-            imgView.image = photo
-            self.scrollView.addSubview(imgView)
-        }
-        scrollView.contentSize = CGSize(width: (scrollView.frame.size.width * CGFloat(images.count)), height: scrollView.frame.size.height)
-        scrollView.delegate = self
-        
 //         description table
 //        for index in 0...detailsJson["Item"]["ItemSpecifics"]["NameValueList"].count - 1 {
 //            let pair = detailsJson["Item"]["ItemSpecifics"]["NameValueList"][index]

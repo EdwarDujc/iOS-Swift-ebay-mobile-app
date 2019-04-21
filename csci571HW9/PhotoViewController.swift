@@ -45,10 +45,15 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
                     self.frame.size = self.scrollView.frame.size
                     
                     let imgView = UIImageView(frame: self.frame)
-                    //            imgView.image = UIImage(named: images[index])
+                    
+                    
                     let imageUrl = URL(string: self.images[index])!
-                    let imageData = try! Data(contentsOf: imageUrl)
-                    let photo = UIImage(data: imageData) ?? UIImage(named: "defaultImage")
+                    
+                    let defaultUrl = URL(string: "http://placehold.it/120x120&text=image1")!
+                    let defaultImgData = try! Data(contentsOf: defaultUrl)
+                    
+                    let imageData = try? Data(contentsOf: imageUrl)
+                    let photo = UIImage(data: imageData ?? defaultImgData) ?? UIImage(named: "defaultImage")
                     
                     imgView.image = photo
                     self.scrollView.addSubview(imgView)
@@ -58,27 +63,8 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
             }
         }
         
-        for index in 0..<images.count {
-            frame.origin.x = scrollView.frame.size.width * CGFloat(index)
-            frame.size = scrollView.frame.size
-            
-            let imgView = UIImageView(frame: frame)
-            let imageUrl = URL(string: images[index])!
-            let imageData = try! Data(contentsOf: imageUrl)
-            let photo = UIImage(data: imageData) ?? UIImage(named: "defaultImage")
-            
-            imgView.image = photo
-            self.scrollView.addSubview(imgView)
-        }
-        scrollView.contentSize = CGSize(width: (scrollView.frame.size.width * CGFloat(images.count)), height: scrollView.frame.size.height)
-        scrollView.delegate = self
         
     }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        var pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
-    }
-    
 
     /*
     // MARK: - Navigation
