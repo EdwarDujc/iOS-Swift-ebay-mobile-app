@@ -12,6 +12,17 @@ class shippingViewController: UIViewController {
     @IBOutlet weak var sellerCaptionLabel: UILabel!
     @IBOutlet weak var shippingCaptionLabel: UILabel!
     @IBOutlet weak var returnCaptionLabel: UILabel!
+    @IBOutlet weak var feedbackScoreLabel: UILabel!
+    @IBOutlet weak var popularityLabel: UILabel!
+    @IBOutlet weak var starImage: UIImageView!
+    @IBOutlet weak var shippingCostLabel: UILabel!
+    @IBOutlet weak var globalShippingLabel: UILabel!
+    @IBOutlet weak var handlingTimeLabel: UILabel!
+    @IBOutlet weak var policyLabel: UILabel!
+    @IBOutlet weak var refundModeLabel: UILabel!
+    @IBOutlet weak var returnWithLabel: UILabel!
+    @IBOutlet weak var shippingPaidLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
