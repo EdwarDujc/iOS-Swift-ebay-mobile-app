@@ -104,7 +104,7 @@ class InfoViewController: UIViewController, UIScrollViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = descriptionTableView.dequeueReusableCell(withIdentifier: "descriptionCell", for: indexPath)
+        let cell = descriptionTableView.dequeueReusableCell(withIdentifier: "descriptionCell", for: indexPath) as! DescriptionTableViewCell
         
 //        let line = sampleDescription[indexPath.row]
 //        cell.textLabel?.text = line
@@ -112,8 +112,11 @@ class InfoViewController: UIViewController, UIScrollViewDelegate, UITableViewDat
         
         let line = Description[indexPath.row]
         let (key, value) = line
-        cell.textLabel?.text = key
-        cell.detailTextLabel?.text = value
+        
+        cell.keyLabel.text = key
+        cell.valueLabel.text = value
+        
+        cell.keyLabel.font = UIFont.boldSystemFont(ofSize: cell.keyLabel.font.pointSize)
         
         return cell
     }
