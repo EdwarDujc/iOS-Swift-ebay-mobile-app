@@ -47,6 +47,19 @@ class InfoViewController: UIViewController, UIScrollViewDelegate, UITableViewDat
             SwiftSpinner.hide()
             if let result = response.result.value {
                 self.detailsJson = result
+                
+                DispatchQueue.main.async {
+                    self.descriptionTableView.reloadData()
+                }
+                // description table
+                for index in 0...self.detailsJson["Item"]["ItemSpecifics"]["NameValueList"].count - 1 {
+                    let pair = self.detailsJson["Item"]["ItemSpecifics"]["NameValueList"][index]
+                    let name = pair["Name"].string ?? "N.A."
+                    let value = pair["Value"][0].string ?? "N.A."
+                    self.Description += [(Name: name, Value: value)]
+                }
+                
+                // photo scroll
                 for index in 0...result["Item"]["PictureURL"].count - 1 {
                     let picUrl = result["Item"]["PictureURL"][index].string ?? ""
                     self.images.append(picUrl)
@@ -71,14 +84,6 @@ class InfoViewController: UIViewController, UIScrollViewDelegate, UITableViewDat
             }
         }
         
-//         description table
-//        for index in 0...detailsJson["Item"]["ItemSpecifics"]["NameValueList"].count - 1 {
-//            let pair = detailsJson["Item"]["ItemSpecifics"]["NameValueList"][index]
-//            let name = pair["Name"].string ?? "N.A."
-//            let value = pair["Value"][0].string ?? "N.A."
-//            Description += [(Name: name, Value: value)]
-//        }
-        
     }
  
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -93,27 +98,22 @@ class InfoViewController: UIViewController, UIScrollViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sampleDescription.count
-        
-//        guard let data = self.detailsJson?["Item"]["ItemSpecifics"]["NameValueList"] else { print("return 0"); return 0 }
-//        print("return ", data.count)
-//        return data.count
-        
-//        return Description.count
+//        return sampleDescription.count
+        return Description.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = descriptionTableView.dequeueReusableCell(withIdentifier: "descriptionCell", for: indexPath)
         
-        let line = sampleDescription[indexPath.row]
-        cell.textLabel?.text = line
-        cell.detailTextLabel?.text = line+"233"
+//        let line = sampleDescription[indexPath.row]
+//        cell.textLabel?.text = line
+//        cell.detailTextLabel?.text = line+"233"
         
-//        let line = Description[indexPath.row]
-//        let (key, value) = line
-//        cell.textLabel?.text = key
-//        cell.detailTextLabel?.text = value
+        let line = Description[indexPath.row]
+        let (key, value) = line
+        cell.textLabel?.text = key
+        cell.detailTextLabel?.text = value
         
         return cell
     }

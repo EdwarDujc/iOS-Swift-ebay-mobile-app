@@ -454,7 +454,6 @@
                         <segue destination="YyC-iO-K3f" kind="relationship" relationship="viewControllers" id="aaV-iT-gCC"/>
                         <segue destination="wfY-ww-h2j" kind="relationship" relationship="viewControllers" id="zIV-ZV-sym"/>
                         <segue destination="lWM-B9-lB7" kind="relationship" relationship="viewControllers" id="yL4-nw-7am"/>
-                        <segue destination="Vab-M7-ABZ" kind="show" identifier="tabBarToInfoView" id="7Zi-30-9TA"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dDg-cr-Gfn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -531,7 +530,4 @@
         <image name="unchecked" width="50" height="50"/>
         <image name="wishListEmpty" width="22" height="22"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="tX1-bw-2Wc"/>
-    </inferredMetricsTieBreakers>
 </document>
