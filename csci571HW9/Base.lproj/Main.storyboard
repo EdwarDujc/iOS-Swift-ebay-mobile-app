@@ -480,18 +480,27 @@
         <!--photoTab-->
         <scene sceneID="xM8-lh-OKv">
             <objects>
-                <viewController title="photoTab" id="wfY-ww-h2j" sceneMemberID="viewController">
+                <viewController title="photoTab" id="wfY-ww-h2j" customClass="PhotoViewController" customModule="csci571HW9" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7xX-HF-ngc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="99h-rj-V3f">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="u0s-gG-vkK"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Photos" image="icons8-google-96" selectedImage="icons8-google-96" id="6uo-ms-fRF"/>
+                    <connections>
+                        <outlet property="scrollView" destination="99h-rj-V3f" id="CBk-8u-Y9Z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xbq-KT-kej" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4823" y="296"/>
+            <point key="canvasLocation" x="4821.739130434783" y="295.98214285714283"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tjE-du-1ii">
@@ -523,6 +532,6 @@
         <image name="wishListEmpty" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7Zi-30-9TA"/>
+        <segue reference="tX1-bw-2Wc"/>
     </inferredMetricsTieBreakers>
 </document>
