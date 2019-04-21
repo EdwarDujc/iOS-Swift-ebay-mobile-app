@@ -41,24 +41,24 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
                 }
                 
                 for index in 0..<self.images.count {
-                    self.frame.origin.x = self.scrollView.frame.size.width * CGFloat(index)
+                    self.frame.origin.y = self.scrollView.frame.size.height * CGFloat(index)
                     self.frame.size = self.scrollView.frame.size
                     
                     let imgView = UIImageView(frame: self.frame)
                     
-                    
                     let imageUrl = URL(string: self.images[index])!
-                    
                     let defaultUrl = URL(string: "http://placehold.it/120x120&text=image1")!
                     let defaultImgData = try! Data(contentsOf: defaultUrl)
-                    
                     let imageData = try? Data(contentsOf: imageUrl)
                     let photo = UIImage(data: imageData ?? defaultImgData) ?? UIImage(named: "defaultImage")
                     
                     imgView.image = photo
                     self.scrollView.addSubview(imgView)
                 }
-                self.scrollView.contentSize = CGSize(width: (self.scrollView.frame.size.width * CGFloat(self.images.count)), height: self.scrollView.frame.size.height)
+                
+                self.scrollView.contentSize = CGSize(width: self.scrollView.frame.size.width , height: (self.scrollView.frame.size.height * CGFloat(self.images.count)))
+
+                
                 self.scrollView.delegate = self
             }
         }
