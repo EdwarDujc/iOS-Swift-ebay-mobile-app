@@ -16,7 +16,7 @@ class SimilarViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var collectionView: UICollectionView!
     
     var images = [UIImage(named: "trojan"), UIImage(named: "trojan"), UIImage(named: "trojan"), UIImage(named: "trojan"), UIImage(named: "trojan")]
-    var titles = ["New Authentic Prada Sunglasses PR 13RS TWC/0A7 RED HAVANA", "title2", "title3", "New Authentic Prada Sunglasses PR 13RS TWC/0A7 RED HAVANA", "title5"]
+    var titles = ["New Authentic Prada Sunglasses PR 13RS TWC/0A7 RED HAVANA", "title2", "title3", "New Authentic Prada Sunglasses PR 13RS TWC/0A7 RED HAVANA yoyoyo", "title5"]
     var shippingCosts = ["$11", "$12", "$13", "$14", "$15"]
     var leftDays = ["1 Days Left", "2 Days Left", "3 Days Left", "4 Days Left", "5 Days Left"]
     var prices = ["$100", "$200", "$300", "$400", "$500"]
@@ -34,6 +34,9 @@ class SimilarViewController: UIViewController, UICollectionViewDelegate, UIColle
         cell.shippingCostLabel.text = shippingCosts[indexPath.item]
         cell.daysLeftLabel.text = leftDays[indexPath.item]
         cell.priceLabel.text = prices[indexPath.item]
+        cell.layer.cornerRadius = 10.0
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.lightGray.cgColor
         
         return cell
     }
@@ -47,6 +50,11 @@ class SimilarViewController: UIViewController, UICollectionViewDelegate, UIColle
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+//        var layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+//        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+//        layout.minimumInteritemSpacing = 5
+//        layout.itemSize = CGSize(width: (self.collectionView.frame.size.width - 20)/2, height: self.collectionView.frame.size.height/1.5)
     }
     
 
