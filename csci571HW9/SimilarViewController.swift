@@ -19,11 +19,39 @@ class SimilarViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     
     @IBAction func sortOrderAction(_ sender: Any) {
-        similarItems = similarItems.sorted(by: {(first, second) -> Bool in
-            let fir=first;
-            let sec=second;
-            return fir["price"].double! < sec["price"].double!;
-        })
+        switch sortKeySegControl.selectedSegmentIndex{
+        case 1:
+            similarItems = similarItems.sorted(by: {(first, second) -> Bool in
+                let fir=first;
+                let sec=second;
+                return fir["title"].string! < sec["title"].string!;
+            })
+        case 2:
+            similarItems = similarItems.sorted(by: {(first, second) -> Bool in
+                let fir=first;
+                let sec=second;
+                return fir["price"].double! < sec["price"].double!;
+            })
+        case 3:
+            similarItems = similarItems.sorted(by: {(first, second) -> Bool in
+                let fir=first;
+                let sec=second;
+                return fir["leftDay"].double! < sec["leftDay"].double!;
+            })
+        case 4:
+            similarItems = similarItems.sorted(by: {(first, second) -> Bool in
+                let fir=first;
+                let sec=second;
+                return fir["shippingCost"].double! < sec["shippingCost"].double!;
+            })
+        default:
+            break
+        }
+        
+        if(sortOrderSegControl.selectedSegmentIndex == 1){
+            similarItems = similarItems.reversed()
+        }
+        
         collectionView.reloadData()
     }
     
