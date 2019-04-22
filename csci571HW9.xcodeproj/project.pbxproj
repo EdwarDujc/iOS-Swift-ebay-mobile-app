@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2A0280CF226CDCFC00F382CE /* LinkUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0280CE226CDCFC00F382CE /* LinkUILabel.swift */; };
 		2A0280D1226D3F3500F382CE /* colorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0280D0226D3F3500F382CE /* colorExtension.swift */; };
+		2A0280D3226D746300F382CE /* SimilarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0280D2226D746300F382CE /* SimilarViewController.swift */; };
+		2A0280D5226D7D6C00F382CE /* SimilarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0280D4226D7D6C00F382CE /* SimilarCollectionViewCell.swift */; };
 		2A27D926226859F1000CB3C1 /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A27D925226859F1000CB3C1 /* SearchResultsTableViewController.swift */; };
 		2A27D92A22685A83000CB3C1 /* SearchResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A27D92922685A83000CB3C1 /* SearchResultsTableViewCell.swift */; };
 		2A4C2CFD226A939400296B54 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4C2CFC226A939400296B54 /* InfoViewController.swift */; };
@@ -44,6 +46,8 @@
 		120080A95D67C72BF503A506 /* Pods-csci571HW9.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-csci571HW9.debug.xcconfig"; path = "Target Support Files/Pods-csci571HW9/Pods-csci571HW9.debug.xcconfig"; sourceTree = "<group>"; };
 		2A0280CE226CDCFC00F382CE /* LinkUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkUILabel.swift; sourceTree = "<group>"; };
 		2A0280D0226D3F3500F382CE /* colorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colorExtension.swift; sourceTree = "<group>"; };
+		2A0280D2226D746300F382CE /* SimilarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarViewController.swift; sourceTree = "<group>"; };
+		2A0280D4226D7D6C00F382CE /* SimilarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarCollectionViewCell.swift; sourceTree = "<group>"; };
 		2A27D925226859F1000CB3C1 /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
 		2A27D92922685A83000CB3C1 /* SearchResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewCell.swift; sourceTree = "<group>"; };
 		2A4C2CFC226A939400296B54 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 				2A93F1BA226B88AD00B2D2C2 /* DescriptionTableViewCell.swift */,
 				2A93F1C2226BE6E100B2D2C2 /* PhotoViewController.swift */,
 				2A93F1C4226C2A2400B2D2C2 /* shippingViewController.swift */,
+				2A0280D2226D746300F382CE /* SimilarViewController.swift */,
+				2A0280D4226D7D6C00F382CE /* SimilarCollectionViewCell.swift */,
 				2A5381CB226513F6005BCA5F /* Main.storyboard */,
 				2A93F1C6226C2E4400B2D2C2 /* borderExtension.swift */,
 				2A0280D0226D3F3500F382CE /* colorExtension.swift */,
@@ -364,6 +370,8 @@
 				2A0280CF226CDCFC00F382CE /* LinkUILabel.swift in Sources */,
 				2A4C2CFD226A939400296B54 /* InfoViewController.swift in Sources */,
 				2A93F1C5226C2A2400B2D2C2 /* shippingViewController.swift in Sources */,
+				2A0280D3226D746300F382CE /* SimilarViewController.swift in Sources */,
+				2A0280D5226D7D6C00F382CE /* SimilarCollectionViewCell.swift in Sources */,
 				2AF5965522685E0A001835CE /* Item.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
