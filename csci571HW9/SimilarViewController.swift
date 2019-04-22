@@ -14,49 +14,103 @@ import SwiftyJSON
 class SimilarViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    var images = [UIImage(named: "trojan"), UIImage(named: "trojan"), UIImage(named: "trojan"), UIImage(named: "trojan"), UIImage(named: "trojan")]
-    var titles = ["New Authentic Prada Sunglasses PR 13RS TWC/0A7 RED HAVANA", "title2", "title3", "New Authentic Prada Sunglasses PR 13RS TWC/0A7 RED HAVANA yoyoyo", "title5"]
-    var shippingCosts = ["$11", "$12", "$13", "$14", "$15"]
-    var leftDays = ["1 Days Left", "2 Days Left", "3 Days Left", "4 Days Left", "5 Days Left"]
-    var prices = ["$100", "$200", "$300", "$400", "$500"]
-    
-    func collectionView(_ collectionView:  UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "similarCell", for: indexPath) as! SimilarCollectionViewCell
-        cell.productImage.image = images[indexPath.item]
-        cell.titleLabel.text = titles[indexPath.item]
-        cell.titleLabel.numberOfLines = 3
-        cell.titleLabel.lineBreakMode = NSLineBreakMode.byTruncatingTail
-        cell.shippingCostLabel.text = shippingCosts[indexPath.item]
-        cell.daysLeftLabel.text = leftDays[indexPath.item]
-        cell.priceLabel.text = prices[indexPath.item]
-        cell.layer.cornerRadius = 10.0
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.lightGray.cgColor
-        
-        return cell
-    }
-    
-
     @IBOutlet weak var sortKeySegControl: UISegmentedControl!
     @IBOutlet weak var sortOrderSegControl: UISegmentedControl!
     
+    
+    @IBAction func sortOrderAction(_ sender: Any) {
+        similarItems = similarItems.sorted(by: {(first, second) -> Bool in
+            let fir=first;
+            let sec=second;
+            return fir["price"].double! < sec["price"].double!;
+        })
+        collectionView.reloadData()
+    }
+    
+    var item1:JSON!
+    var item2:JSON!
+    var item3:JSON!
+    var item4:JSON!
+    var item5:JSON!
+    var item6:JSON!
+    var similarItems:[JSON] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
         
-//        var layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-//        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-//        layout.minimumInteritemSpacing = 5
-//        layout.itemSize = CGSize(width: (self.collectionView.frame.size.width - 20)/2, height: self.collectionView.frame.size.height/1.5)
+        item1 = [
+            "title": "gNew Authentic Prada Sunglasses PR 13RS TWC/0A7 RED HAVANA",
+            "image": UIImage(named: "trojan"),
+            "shippingCost": 11,
+            "leftDay": 6,
+            "price": 400
+        ]
+        
+        item2 = [
+            "title": "bNew Authentic Prada Sunglasses PR 13RS TWC/0A7 RED HAVANA",
+            "image": UIImage(named: "trojan"),
+            "shippingCost": 21,
+            "leftDay": 4,
+            "price": 500
+        ]
+        
+        item3 = [
+            "title": "fNew Authentic Prada Sunglasses PR 13RS TWC/0A7 RED HAVANA",
+            "image": UIImage(named: "trojan"),
+            "shippingCost": 31,
+            "leftDay": 5,
+            "price": 600
+        ]
+        
+        item4 = [
+            "title": "dNew Authentic Prada Sunglasses PR 13RS TWC/0A7 RED HAVANA",
+            "image": UIImage(named: "trojan"),
+            "shippingCost": 41,
+            "leftDay": 1,
+            "price": 300
+        ]
+        
+        item5 = [
+            "title": "cNew Authentic Prada Sunglasses PR 13RS TWC/0A7 RED HAVANA",
+            "image": UIImage(named: "trojan"),
+            "shippingCost": 51,
+            "leftDay": 2,
+            "price": 100
+        ]
+        
+        item6 = [
+            "title": "eNew Authentic Prada Sunglasses PR 13RS TWC/0A7 RED HAVANA",
+            "image": UIImage(named: "trojan"),
+            "shippingCost": 61,
+            "leftDay": 3,
+            "price": 200
+        ]
+        
+        similarItems = [item1, item2, item3, item4, item5, item6]
+        
+    } // viewdidload
+    
+    func collectionView(_ collectionView:  UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return similarItems.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "similarCell", for: indexPath) as! SimilarCollectionViewCell
+        cell.productImage.image = UIImage(named: "trojan")
+        cell.titleLabel.text = similarItems[indexPath.item]["title"].string ?? ""
+        cell.titleLabel.numberOfLines = 3
+        cell.titleLabel.lineBreakMode = NSLineBreakMode.byTruncatingTail
+        cell.shippingCostLabel.text = "$" + String(similarItems[indexPath.item]["shippingCost"].int ?? -1)
+        cell.daysLeftLabel.text = String(similarItems[indexPath.item]["leftDay"].int ?? -1) + " Days Left"
+        cell.priceLabel.text = "$" + String(similarItems[indexPath.item]["price"].int ?? -1)
+        cell.layer.cornerRadius = 10.0
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.lightGray.cgColor
+        
+        return cell
+    }
 
     /*
     // MARK: - Navigation

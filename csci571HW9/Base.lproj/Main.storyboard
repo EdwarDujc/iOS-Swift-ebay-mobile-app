@@ -712,6 +712,9 @@
                                     <segment title="Days Left"/>
                                     <segment title="Shipping"/>
                                 </segments>
+                                <connections>
+                                    <action selector="sortOrderAction:" destination="lWM-B9-lB7" eventType="valueChanged" id="Qzr-tk-5jw"/>
+                                </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ZZC-QH-Z0d">
                                 <rect key="frame" x="20" y="211" width="374" height="29"/>
@@ -720,6 +723,9 @@
                                     <segment title="Ascending"/>
                                     <segment title="Descending"/>
                                 </segments>
+                                <connections>
+                                    <action selector="sortOrderAction:" destination="lWM-B9-lB7" eventType="valueChanged" id="exB-x2-tdn"/>
+                                </connections>
                             </segmentedControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uNu-uA-aPm">
                                 <rect key="frame" x="20" y="266" width="374" height="547"/>
