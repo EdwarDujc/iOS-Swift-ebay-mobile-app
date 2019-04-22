@@ -145,7 +145,9 @@ class SearchResultsTableViewController: UITableViewController {
             price += item["sellingStatus"][0]["currentPrice"][0]["__value__"].string ?? "N.A."
             var shipping = item["shippingInfo"][0]["shippingServiceCost"][0]["__value__"].string ?? "N.A."
             if (shipping == "0.0"){
-                shipping = "FREE SHIPPING"
+                shipping = "FREE"
+            } else if (shipping != "N.A.") {
+                shipping = "$" + shipping
             }
             let zipcode = item["postalCode"][0].string ?? "N.A."
             let condition_id = item["condition"][0]["conditionId"][0].string ?? "N.A."

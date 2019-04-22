@@ -47,6 +47,10 @@ class TabBarViewController: UITabBarController {
             infoView.productSearch = self.product!
         }
         
+        if let shippingView = self.viewControllers![1] as? shippingViewController {
+            shippingView.productSearch = self.product!
+        }
+        
         if let photoView = self.viewControllers![2] as? PhotoViewController {
             photoView.itemTitle = self.product!.title
         }
