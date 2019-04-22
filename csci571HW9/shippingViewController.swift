@@ -29,6 +29,23 @@ class shippingViewController: UIViewController {
     @IBOutlet weak var returnWithLabel: UILabel!
     @IBOutlet weak var shippingPaidLabel: UILabel!
     
+    @IBOutlet weak var sellerCaptionImage: UIImageView!
+    @IBOutlet weak var shippingCaptionImage: UIImageView!
+    @IBOutlet weak var returnCaptionImage: UIImageView!
+    
+    @IBOutlet weak var storeNameKey: UILabel!
+    @IBOutlet weak var feedbackScoreKey: UILabel!
+    @IBOutlet weak var popularityKey: UILabel!
+    @IBOutlet weak var feedbackStarKey: UILabel!
+    @IBOutlet weak var shippingCostKey: UILabel!
+    @IBOutlet weak var globalShippingKey: UILabel!
+    @IBOutlet weak var handlingTimeKey: UILabel!
+    @IBOutlet weak var policyKey: UILabel!
+    @IBOutlet weak var refundModeKey: UILabel!
+    @IBOutlet weak var returnWithKey: UILabel!
+    @IBOutlet weak var shippingPaidKey: UILabel!
+    
+    
     var productSearch: Item!
     var storeUrl = "www.google.com"
     
@@ -56,9 +73,23 @@ class shippingViewController: UIViewController {
                 // store name
                 self.storeNameLabel.text = item["Storefront"]["StoreName"].string ?? ""
                 self.storeUrl = item["Storefront"]["StoreURL"].string ?? ""
-                // feedback
-                self.feedbackScoreLabel.text = String(item["Seller"]["FeedbackScore"].int ?? 0)
-                self.popularityLabel.text = String(item["Seller"]["PositiveFeedbackPercent"].int ?? 0)
+                if(self.storeNameLabel.text == ""){
+                    self.storeNameLabel.isHidden = true
+                    self.storeNameKey.isHidden = true
+                }
+                // feedback score
+                self.feedbackScoreLabel.text = String(item["Seller"]["FeedbackScore"].int ?? -1)
+                if(self.feedbackScoreLabel.text == "-1"){
+                    self.feedbackScoreLabel.isHidden = true
+                    self.feedbackScoreKey.isHidden = true
+                }
+                // popularity
+                self.popularityLabel.text = String(item["Seller"]["PositiveFeedbackPercent"].int ?? -1)
+                if(self.popularityLabel.text == "-1"){
+                    self.popularityLabel.isHidden = true
+                    self.popularityKey.isHidden = true
+                }
+                // Feedback Star
                 let feedbackStar = item["Seller"]["FeedbackRatingStar"].string ?? ""
                 switch feedbackStar{
                 case "Yellow":
@@ -113,29 +144,38 @@ class shippingViewController: UIViewController {
                 
                 default:
                     self.starImage.isHidden = true
+                    self.feedbackStarKey.isHidden = true
                 }
-                
-                print(item)
-                // shipping info
+                // Shipping Info
+                // Shipping Cost
                 if (self.productSearch.shipping == "FREE"){
                     self.shippingCostLabel.text = self.productSearch.shipping                }
                 else if (self.productSearch.shipping != "N.A."){
                     self.shippingCostLabel.text = self.productSearch.shipping
                 }
-                
+                else {
+                    self.shippingCostLabel.isHidden = true
+                    self.shippingCostKey.isHidden = true
+                }
+                // Global Shipping
                 let globalShipping = item["GlobalShipping"].bool ?? false
                 if (globalShipping) {
                     self.globalShippingLabel.text = "Yes"
                 } else {
                     self.globalShippingLabel.text = "No"
                 }
-                let handlingTime = item["HandlingTime"].int ?? 0
-                if (handlingTime <= 1){
+                // handling time
+                let handlingTime = item["HandlingTime"].int ?? -1
+                if (handlingTime == 0 || handlingTime == 1){
                     self.handlingTimeLabel.text = String(handlingTime) + " Day"
-                } else {
+                } else if (handlingTime > 1) {
                     self.handlingTimeLabel.text = String(handlingTime) + " Days"
+                } else {
+                    self.handlingTimeLabel.isHidden = true
+                    self.handlingTimeKey.isHidden = true
                 }
                 // Return Policy
+                // Policy
                 let policy = item["ReturnPolicy"]["ReturnsAccepted"].string ?? ""
                 switch policy{
                 case "ReturnsNotAccepted":
@@ -144,13 +184,37 @@ class shippingViewController: UIViewController {
                     self.policyLabel.text = "Returns Accepted"
                 default:
                     self.policyLabel.isHidden = true
+                    self.policyKey.isHidden = true
                 }
                 //Refund Mode
                 self.refundModeLabel.text = item["ReturnPolicy"]["Refund"].string ?? ""
+                if (self.refundModeLabel.text == "") {
+                    self.refundModeLabel.isHidden = true
+                    self.refundModeKey.isHidden = true
+                }
                 //Return Within
                 self.returnWithLabel.text = item["ReturnPolicy"]["ReturnsWithin"].string ?? ""
+                if(self.returnWithLabel.text == "") {
+                    self.returnWithLabel.isHidden = true
+                    self.returnWithKey.isHidden = true
+                }
                 //Shipping Cost Paid By
                 self.shippingPaidLabel.text = item["ReturnPolicy"]["ShippingCostPaidBy"].string ?? ""
+                if (self.shippingPaidLabel.text == ""){
+                    self.shippingPaidLabel.isHidden = true
+                    self.shippingPaidKey.isHidden = true
+                }
+                
+                // hide section
+                if (self.storeNameKey.isHidden && self.feedbackScoreKey.isHidden && self.popularityKey.isHidden && self.feedbackStarKey.isHidden){
+                    self.sellerCaptionImage.isHidden = true
+                    self.sellerCaptionLabel.isHidden = true
+                }
+                
+                if (self.policyKey.isHidden && self.refundModeKey.isHidden && self.returnWithKey.isHidden && self.shippingPaidKey.isHidden) {
+                    self.returnCaptionImage.isHidden = true
+                    self.returnCaptionLabel.isHidden = true
+                }
                 
                 
             } // item = response.result.value
