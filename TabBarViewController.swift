@@ -48,7 +48,9 @@ class TabBarViewController: UITabBarController {
     }
     
     @objc func wishButtonAction(){
-        print("to implement: wish list")
+        var message = product?.title ?? "Unknown product"
+        message += " was added to the Wish List"
+        self.view.makeToast(message, duration: 1.5, position: .bottom)
     }
     
     override func viewDidLoad() {
