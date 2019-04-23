@@ -55,6 +55,9 @@ class TabBarViewController: UITabBarController {
             photoView.itemTitle = self.product!.title
         }
         
+        if let similarView = self.viewControllers![3] as? SimilarViewController {
+            similarView.itemId = self.product!.id
+        }
 
     }
     
