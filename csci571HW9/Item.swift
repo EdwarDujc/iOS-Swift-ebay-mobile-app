@@ -18,8 +18,9 @@ class Item {
     var photo: UIImage
     var wishButton: UIButton
     var isInCart: Bool
+    var viewUrl: String
     
-    init?(id: String, title: String, price: String, shipping: String, zipcode: String, condition: String, photo: UIImage, wishButton: UIButton, isInCart: Bool) {
+    init?(id: String, title: String, price: String, shipping: String, zipcode: String, condition: String, photo: UIImage, wishButton: UIButton, isInCart: Bool, viewUrl: String) {
         self.id = id
         self.title = title
         self.price = price
@@ -29,5 +30,6 @@ class Item {
         self.photo = photo
         self.wishButton = wishButton
         self.isInCart = isInCart
+        self.viewUrl = viewUrl
     }
 }

@@ -177,9 +177,9 @@ class SearchResultsTableViewController: UITableViewController {
             func pressed(sender: UIButton!) {
                 print("wish button clicked")
             }
-
+            let viewUrl = item["viewItemURL"][0].string ?? "www.ebay.com"
             
-            guard let product = Item(id: id, title: title, price: price, shipping: shipping, zipcode: zipcode, condition: condition, photo: photo!, wishButton: wishButton, isInCart: false) else {
+            guard let product = Item(id: id, title: title, price: price, shipping: shipping, zipcode: zipcode, condition: condition, photo: photo!, wishButton: wishButton, isInCart: false, viewUrl: viewUrl) else {
                 fatalError("Unable to instantiate product 1")
             }
             

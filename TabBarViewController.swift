@@ -19,9 +19,32 @@ class TabBarViewController: UITabBarController {
     var item_title: String?
     var detailsJson: JSON?
     
+    func openUrl(urlString:String!) {
+        var url = URL(string: "www.ebay.com")!
+        if(urlString != ""){
+            url = URL(string: urlString)!
+        }
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
     
     @objc func facebookButtonAction(){
-        print("to implement: facebook")
+        var url = "https://www.facebook.com/sharer/sharer.php?u="
+        let productName = product?.title ?? "Unkonwn Title"
+        let price = product?.price ?? "Unknown price"
+        let link = product?.viewUrl ?? "www.ebay.com"
+        var text = "Buy " + productName
+        text += " at "
+        text += price + " from link below"
+        
+        text = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        text = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        
+        url += link + "&quote=" + text
+        openUrl(urlString: url)
     }
     
     @objc func wishButtonAction(){
