@@ -16,5 +16,5 @@ class SimilarCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var productImage: UIImageView!
     
-    
+//    var viewItemURL = ""
 }

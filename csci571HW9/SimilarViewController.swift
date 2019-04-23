@@ -79,13 +79,13 @@ class SimilarViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         sortOrderSegControl.isEnabled = false
         
-        itemId = "163648524871"
+//        itemId = "163648524871"
         
         let url = "http://csci571-jincheng-nodejs.us-east-2.elasticbeanstalk.com/similar?itemId=" + itemId
-//        SwiftSpinner.show("Fetching Similar Items...")
+        SwiftSpinner.show("Fetching Similar Items...")
         Alamofire.request(URLRequest(url: URL(string: url)! )).responseSwiftyJSON{
             response in
-//            SwiftSpinner.hide()
+            SwiftSpinner.hide()
             if let result = response.result.value {
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
@@ -151,11 +151,31 @@ class SimilarViewController: UIViewController, UICollectionViewDelegate, UIColle
             cell.daysLeftLabel.text = String(daysLeftInt) + " Days Left"
         }
         cell.priceLabel.text = "$" + String(similarItems[indexPath.item]["price"].int ?? -1)
+//        cell.viewItemURL = similarItems[indexPath.item]["viewItemURL"].string ?? "www.ebay.com"
+        
         cell.layer.cornerRadius = 10.0
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.lightGray.cgColor
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = similarItems[indexPath.item]
+        let url = cell["viewItemURL"].string ?? "www.ebay.com"
+        openUrl(urlString: url)
+    }
+    
+    func openUrl(urlString:String!) {
+        var url = URL(string: "www.ebay.com")!
+        if(urlString != ""){
+            url = URL(string: urlString)!
+        }
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
     }
 
     /*
@@ -167,5 +187,4 @@ class SimilarViewController: UIViewController, UICollectionViewDelegate, UIColle
         // Pass the selected object to the new view controller.
     }
     */
-
 }
