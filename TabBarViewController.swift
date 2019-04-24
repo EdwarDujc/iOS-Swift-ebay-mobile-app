@@ -19,6 +19,9 @@ class TabBarViewController: UITabBarController {
     var item_title: String?
     var detailsJson: JSON?
     
+    var facebookButton:UIBarButtonItem!
+    var wishButton:UIBarButtonItem!
+    
     func openUrl(urlString:String!) {
         var url = URL(string: "www.ebay.com")!
         if(urlString != ""){
@@ -48,9 +51,56 @@ class TabBarViewController: UITabBarController {
     }
     
     @objc func wishButtonAction(){
-        var message = product?.title ?? "Unknown product"
-        message += " was added to the Wish List"
-        self.view.makeToast(message, duration: 1.5, position: .bottom)
+        let defaults = UserDefaults.standard
+        if var allObject = defaults.dictionary(forKey: "wishList"){
+            if let object = allObject[product!.id]{
+                allObject.removeValue(forKey: product!.id)
+                defaults.set(allObject, forKey: "wishList")
+                wishButton.image = UIImage(named: "wishListEmpty")
+                // toast message
+                var message = product?.title ?? "Unknown product"
+                message += " was removed from the Wish List"
+                self.view.makeToast(message, duration: 1.5, position: .bottom)
+            } else {
+                allObject[product!.id] = [
+                    "id":product!.id,
+                    "title":product!.title,
+                    "price":product!.price,
+                    "shipping":product!.shipping,
+                    "zipcode":product!.zipcode,
+                    "condition":product!.condition,
+                    "photoUrl":product!.photoUrl,
+                    "isIncart":product!.isInCart,
+                    "viewUrl":product!.viewUrl
+                ]
+                defaults.set(allObject, forKey: "wishList")
+                wishButton.image = UIImage(named: "wishListFilled")
+                // toast message
+                var message = product?.title ?? "Unknown product"
+                message += " was added to the Wish List"
+                self.view.makeToast(message, duration: 1.5, position: .bottom)
+            }
+        } else {
+            var cart = [product!.id: [
+                "id":product!.id,
+                "title":product!.title,
+                "price":product!.price,
+                "shipping":product!.shipping,
+                "zipcode":product!.zipcode,
+                "condition":product!.condition,
+                "photoUrl":product!.photoUrl,
+                "isIncart":product!.isInCart,
+                "viewUrl":product!.viewUrl
+                ]]
+            defaults.set(cart, forKey: "wishList")
+            wishButton.image = UIImage(named: "wishListFilled")
+            // toast message
+            var message = product?.title ?? "Unknown product"
+            message += " was added to the Wish List"
+            self.view.makeToast(message, duration: 1.5, position: .bottom)
+        }
+        
+        
     }
     
     override func viewDidLoad() {
@@ -58,11 +108,11 @@ class TabBarViewController: UITabBarController {
         item_title = product?.title
         self.navigationController!.navigationBar.topItem!.title = ""
         
-        let facebookButton = UIBarButtonItem(title: "fb", style: .plain, target: self, action: #selector(facebookButtonAction))
+        facebookButton = UIBarButtonItem(title: "fb", style: .plain, target: self, action: #selector(facebookButtonAction))
         
         facebookButton.image = UIImage(named: "facebook")
         
-        let wishButton = UIBarButtonItem(title: "wl", style: .plain, target: self, action: #selector(wishButtonAction))
+        wishButton = UIBarButtonItem(title: "wl", style: .plain, target: self, action: #selector(wishButtonAction))
         
         wishButton.image = UIImage(named: "wishListEmpty")
         

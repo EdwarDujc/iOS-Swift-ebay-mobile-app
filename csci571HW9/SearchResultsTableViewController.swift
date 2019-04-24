@@ -19,7 +19,7 @@ class SearchResultsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    self.navigationController!.navigationBar.topItem!.title = ""
+    self.navigationController!.navigationBar.topItem!.title = "Product Search"
         loadProducts()
 
         // Uncomment the following line to preserve selection between presentations
@@ -179,7 +179,7 @@ class SearchResultsTableViewController: UITableViewController {
             }
             let viewUrl = item["viewItemURL"][0].string ?? "www.ebay.com"
             
-            guard let product = Item(id: id, title: title, price: price, shipping: shipping, zipcode: zipcode, condition: condition, photo: photo!, wishButton: wishButton, isInCart: false, viewUrl: viewUrl) else {
+            guard let product = Item(id: id, title: title, price: price, shipping: shipping, zipcode: zipcode, condition: condition, photo: photo!, photoUrl: galleryURL, isInCart: false, viewUrl: viewUrl) else {
                 fatalError("Unable to instantiate product 1")
             }
             
