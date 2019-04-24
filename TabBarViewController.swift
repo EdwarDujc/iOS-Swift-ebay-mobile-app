@@ -106,7 +106,7 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         item_title = product?.title
-        self.navigationController!.navigationBar.topItem!.title = ""
+        self.navigationController!.navigationBar.topItem!.title = "Search Results"
         
         facebookButton = UIBarButtonItem(title: "fb", style: .plain, target: self, action: #selector(facebookButtonAction))
         

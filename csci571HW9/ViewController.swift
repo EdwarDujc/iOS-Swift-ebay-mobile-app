@@ -30,6 +30,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var clearButton: UIButton!
     
+    @IBOutlet weak var wishListTabelView: UITableView!
+    @IBOutlet weak var totalKeyLabel: UILabel!
+    @IBOutlet weak var totalValueLabel: UILabel!
+    
+    
     //MARK: properties
     var condNewChecked = false
     var condUsedChecked = false
@@ -45,9 +50,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         switch sender.selectedSegmentIndex {
         case 0 :
             searchView.isHidden = false
+            wishListTabelView.isHidden = true
+            totalKeyLabel.isHidden = true
+            totalValueLabel.isHidden = true
             break
         case 1:
             searchView.isHidden = true
+            wishListTabelView.isHidden = false
+            totalKeyLabel.isHidden = false
+            totalValueLabel.isHidden = false
             break
         default:
             break
@@ -63,6 +74,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
     
     override func viewDidLoad() {
+        
+        searchView.isHidden = false
+        wishListTabelView.isHidden = true
+        totalKeyLabel.isHidden = true
+        totalValueLabel.isHidden = true
         
         // TEST ONLY! REMOVE!
         self.keyword.text = "iphone"

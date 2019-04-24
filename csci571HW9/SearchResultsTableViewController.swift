@@ -19,7 +19,7 @@ class SearchResultsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    self.navigationController!.navigationBar.topItem!.title = "Product Search"
+        self.navigationController!.navigationBar.topItem!.title = "Product Search"
         loadProducts()
 
         // Uncomment the following line to preserve selection between presentations
@@ -54,8 +54,7 @@ class SearchResultsTableViewController: UITableViewController {
         cell.zipcodeLabel.text = product.zipcode
         cell.conditionLabel.text = product.condition
         cell.photoImageView.image = product.photo
-//        cell.wishButton = product.wishButton
-
+        
         return cell
     }
     
