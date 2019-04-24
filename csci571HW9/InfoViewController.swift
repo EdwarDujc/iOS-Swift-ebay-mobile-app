@@ -36,7 +36,7 @@ class InfoViewController: UIViewController, UIScrollViewDelegate, UITableViewDat
         name.numberOfLines = 3
         name.lineBreakMode = NSLineBreakMode.byTruncatingTail
         name.text = productSearch.title
-        price.text = productSearch.price
+        price.text = "$" + productSearch.price
         
         // photos
         let url = "http://csci571-jincheng-nodejs.us-east-2.elasticbeanstalk.com/details?itemId=" + productSearch.id

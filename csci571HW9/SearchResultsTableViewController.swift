@@ -49,7 +49,7 @@ class SearchResultsTableViewController: UITableViewController {
         // Configure the cell...
         let product = products[indexPath.row]
         cell.titleLabel.text = product.title
-        cell.priceLabel.text = product.price
+        cell.priceLabel.text = "$" + product.price
         cell.shippingLabel.text = product.shipping
         cell.zipcodeLabel.text = product.zipcode
         cell.conditionLabel.text = product.condition
@@ -140,7 +140,8 @@ class SearchResultsTableViewController: UITableViewController {
             
             
             let title = item["title"][0].string ?? "N.A."
-            var price = "$"
+//            var price = "$"
+            var price = ""
             price += item["sellingStatus"][0]["currentPrice"][0]["__value__"].string ?? "N.A."
             var shipping = item["shippingInfo"][0]["shippingServiceCost"][0]["__value__"].string ?? "N.A."
             if (shipping == "0.0"){

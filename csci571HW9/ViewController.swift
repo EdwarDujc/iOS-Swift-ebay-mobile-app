@@ -33,6 +33,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     @IBOutlet weak var wishListTabelView: UITableView!
     @IBOutlet weak var totalKeyLabel: UILabel!
     @IBOutlet weak var totalValueLabel: UILabel!
+    @IBOutlet weak var emptyWishListLabel: UILabel!
     
     
     //MARK: properties
@@ -56,13 +57,23 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             wishListTabelView.isHidden = true
             totalKeyLabel.isHidden = true
             totalValueLabel.isHidden = true
+            emptyWishListLabel.isHidden = true
             break
         case 1:
-            searchView.isHidden = true
-            wishListTabelView.isHidden = false
-            totalKeyLabel.isHidden = false
-            totalValueLabel.isHidden = false
-            wishListTabelView.reloadData()
+            if (cartKeys.count > 0){
+                searchView.isHidden = true
+                wishListTabelView.isHidden = false
+                totalKeyLabel.isHidden = false
+                totalValueLabel.isHidden = false
+                emptyWishListLabel.isHidden = true
+                wishListTabelView.reloadData()
+            } else {
+                searchView.isHidden = true
+                wishListTabelView.isHidden = true
+                totalKeyLabel.isHidden = true
+                totalValueLabel.isHidden = true
+                emptyWishListLabel.isHidden = false
+            }
             break
         default:
             break
@@ -77,12 +88,32 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
                 }
             }
     
+    func updateTotalPrice(){
+        var totalKeyLabelString = "WishList Total(" + String(cartKeys.count)
+        if (cartKeys.count <= 1){
+            totalKeyLabelString += " item):"
+        } else {
+            totalKeyLabelString += " items):"
+        }
+        totalKeyLabel.text = totalKeyLabelString
+        
+        var totalPrice = 0.0
+        if (cartKeys.count) > 0 {
+            for index in 0...cartKeys.count-1{
+                totalPrice += Double(cartItems[cartKeys[index]]!["price"] as! String)!
+                print(cartItems[cartKeys[index]]!["price"])
+            }
+            totalValueLabel.text = "$" + String(totalPrice)
+        }
+    }
+    
     override func viewDidLoad() {
         
         searchView.isHidden = false
         wishListTabelView.isHidden = true
         totalKeyLabel.isHidden = true
         totalValueLabel.isHidden = true
+        emptyWishListLabel.isHidden = true
         
         // MARK: wishList table in viewDidLoad
         self.wishListTabelView.delegate = self
@@ -98,6 +129,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             cartItems=store
             cartKeys=[]
         }
+        
+        updateTotalPrice()
         
         // TEST ONLY! REMOVE!
         self.keyword.text = "iphone"
@@ -350,7 +383,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
 //            print("temp:", temp)
             
             cartTableViewCell.titleLabel.text = temp?["title"] as! String
-            cartTableViewCell.priceLabel.text = temp?["price"] as! String
+            let priceString = temp?["price"] as! String ?? "Unknown Price"
+            cartTableViewCell.priceLabel.text = "$" + priceString
             cartTableViewCell.shippingLabel.text = temp?["shipping"] as! String
             cartTableViewCell.zipcodeLabel.text = temp?["zipcode"] as! String
             cartTableViewCell.conditionLabel.text = temp?["condition"] as! String
@@ -379,9 +413,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             
             message(m: removedTitle + " was removed from favorites")
             tableView.deleteRows(at: [indexPath], with: .fade)
-            if(cartKeys.count<=0){
-                print("to implement: no wish list items")
+            updateTotalPrice()
+            if(cartKeys.count == 0){
+                emptyWishListLabel.isHidden = false
+                wishListTabelView.isHidden = true
+                totalValueLabel.isHidden = true
+                totalKeyLabel.isHidden = true
             }
+            
         }
     }
     
@@ -403,6 +442,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             
         }
         wishListTabelView.reloadData()
+        updateTotalPrice()
     }
     
 }

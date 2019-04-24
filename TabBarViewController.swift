@@ -40,7 +40,7 @@ class TabBarViewController: UITabBarController {
         let price = product?.price ?? "Unknown price"
         let link = product?.viewUrl ?? "www.ebay.com"
         var text = "Buy " + productName
-        text += " at "
+        text += " at $"
         text += price + " from link below"
         
         text = text.trimmingCharacters(in: .whitespacesAndNewlines)
