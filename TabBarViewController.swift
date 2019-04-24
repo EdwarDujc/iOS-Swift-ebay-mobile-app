@@ -114,8 +114,17 @@ class TabBarViewController: UITabBarController {
         
         wishButton = UIBarButtonItem(title: "wl", style: .plain, target: self, action: #selector(wishButtonAction))
         
-        wishButton.image = UIImage(named: "wishListEmpty")
-        
+        let defaults = UserDefaults.standard
+        if let allObject = defaults.dictionary(forKey: "wishList"){
+            if let object = allObject[product!.id]{
+                wishButton.image = UIImage(named: "wishListFilled")
+            }else{
+                wishButton.image = UIImage(named: "wishListEmpty")
+            }
+        }else{
+            wishButton.image = UIImage(named: "wishListEmpty")
+        }
+                
         self.navigationItem.rightBarButtonItems = [ wishButton, facebookButton]
         
         if let infoView = self.viewControllers![0] as? InfoViewController {

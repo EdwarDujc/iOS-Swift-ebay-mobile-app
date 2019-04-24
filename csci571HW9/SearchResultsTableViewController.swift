@@ -178,7 +178,7 @@ class SearchResultsTableViewController: UITableViewController {
             }
             let viewUrl = item["viewItemURL"][0].string ?? "www.ebay.com"
             
-            guard let product = Item(id: id, title: title, price: price, shipping: shipping, zipcode: zipcode, condition: condition, photo: photo!, photoUrl: galleryURL, isInCart: false, viewUrl: viewUrl) else {
+            guard let product = Item(id: id, title: title, price: price, shipping: shipping, zipcode: zipcode, condition: condition, photo: photo!, photoUrl: galleryURL, isInCart: false, viewUrl: galleryURL) else {
                 fatalError("Unable to instantiate product 1")
             }
             

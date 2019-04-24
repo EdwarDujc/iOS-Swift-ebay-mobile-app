@@ -14,7 +14,7 @@ import Alamofire
 import SwiftyJSON
 import AlamofireSwiftyJSON
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     //MARK: outlets
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var keyword: UITextField!
@@ -44,6 +44,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var hereZipcode = "00000"
     var searchResultsJson: JSON?
     
+    var cartKeys:[String]!
+    var cartItems:[String:NSDictionary]!
+    
     let category_option:[[String]] = [["All Categories", "Art", "Baby", "Books", "Clothing, Shoes & Accessories", "Computers/Tablets & Networking", "Health & Beauty", "Music", "Video Games & Consoles"]]
     
     @IBAction func SearchWishControl(_ sender: UISegmentedControl) {
@@ -59,6 +62,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             wishListTabelView.isHidden = false
             totalKeyLabel.isHidden = false
             totalValueLabel.isHidden = false
+            wishListTabelView.reloadData()
             break
         default:
             break
@@ -79,6 +83,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
         wishListTabelView.isHidden = true
         totalKeyLabel.isHidden = true
         totalValueLabel.isHidden = true
+        
+        // MARK: wishList table in viewDidLoad
+        self.wishListTabelView.delegate = self
+        self.wishListTabelView.dataSource = self
+        
+        let defaults = UserDefaults.standard
+        if let allObject = defaults.dictionary(forKey: "wishList"){
+            cartItems=(allObject as? [String:NSDictionary])!
+            cartKeys=Array(cartItems.keys)
+        }else{
+            let store=[String:NSDictionary]()
+            defaults.set(store, forKey: "wishList")
+            cartItems=store
+            cartKeys=[]
+        }
         
         // TEST ONLY! REMOVE!
         self.keyword.text = "iphone"
@@ -300,6 +319,91 @@ class ViewController: UIViewController, UITextFieldDelegate {
         userZipcode.isHidden = true
     }
     
-    @IBAction func unwindToVC1(segue:UIStoryboardSegue) { }
+    // MARK: wish list table
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        let row = indexPath.row
+        print("go to detail at row ", row)
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        print("cartKeys.count: ", cartKeys.count)
+        return cartKeys.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 110.0;//Choose your custom row height
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = wishListTabelView.dequeueReusableCell(withIdentifier: "wishListCell", for: indexPath)
+        // Configure the cell...
+        if let cartTableViewCell = cell as? WishListTableViewCell {
+//            print("indexPath.row: ", indexPath.row)
+//            print("cartKeys[indexPath.row]", cartKeys[indexPath.row])
+//            print("cartItems[cartKeys[indexPath.row]]: ", cartItems[cartKeys[indexPath.row]])
+            let temp = cartItems[cartKeys[indexPath.row]]
+//            print("temp:", temp)
+            
+            cartTableViewCell.titleLabel.text = temp?["title"] as! String
+            cartTableViewCell.priceLabel.text = temp?["price"] as! String
+            cartTableViewCell.shippingLabel.text = temp?["shipping"] as! String
+            cartTableViewCell.zipcodeLabel.text = temp?["zipcode"] as! String
+            cartTableViewCell.conditionLabel.text = temp?["condition"] as! String
+            
+            let imageUrlString = temp?["viewUrl"] as! String
+//            print("imageUrlString", imageUrlString)
+            let imageUrl = URL(string: imageUrlString)!
+            let imageData = try! Data(contentsOf: imageUrl)
+            cartTableViewCell.photoImageView?.image = UIImage(data: imageData) ?? UIImage(named: "defaultImage")
+//            cartTableViewCell.photoImageView?.frame = CGRect(x: 20, y:9, width:90, height:90);
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let defaults = UserDefaults.standard
+//            var temp=(cartItems[cartKeys[indexPath.row]]!).mutableCopy() as! Dictionary<String,String>;
+            let temp = cartItems[cartKeys[indexPath.row]]
+            
+            let removedTitle = temp!["title"] as! String
+            
+            cartItems.removeValue(forKey: cartKeys[indexPath.row])
+            cartKeys.remove(at: indexPath.row)
+            defaults.set(cartItems, forKey: "wishList")
+            
+            message(m: removedTitle + " was removed from favorites")
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            if(cartKeys.count<=0){
+                print("to implement: no wish list items")
+            }
+        }
+    }
+    
+    func message(m:String){
+        self.view.makeToast(m, duration: 1.5, position: .bottom)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let defaults = UserDefaults.standard
+        if let allObject = defaults.dictionary(forKey: "wishList"){
+            cartItems=(allObject as? [String:NSDictionary])!
+            cartKeys=Array(cartItems.keys)
+        }else{
+            let store=[String:NSDictionary]()
+            defaults.set(store, forKey: "wishList")
+            cartItems=store
+            cartKeys=[]
+            
+        }
+        wishListTabelView.reloadData()
+    }
+    
 }
 

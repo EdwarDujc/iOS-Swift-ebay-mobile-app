@@ -9,6 +9,14 @@
 import UIKit
 
 class WishListTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var shippingLabel: UILabel!
+    @IBOutlet weak var zipcodeLabel: UILabel!
+    @IBOutlet weak var conditionLabel: UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
