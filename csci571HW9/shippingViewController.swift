@@ -187,6 +187,8 @@ class shippingViewController: UIViewController {
                     self.policyKey.isHidden = true
                 }
                 //Refund Mode
+                self.refundModeLabel.numberOfLines = 2
+                self.refundModeLabel.lineBreakMode = NSLineBreakMode.byTruncatingTail
                 self.refundModeLabel.text = item["ReturnPolicy"]["Refund"].string ?? ""
                 if (self.refundModeLabel.text == "") {
                     self.refundModeLabel.isHidden = true
