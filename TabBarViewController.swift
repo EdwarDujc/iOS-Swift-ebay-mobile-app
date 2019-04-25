@@ -41,7 +41,7 @@ class TabBarViewController: UITabBarController {
         let link = product?.viewUrl ?? "www.ebay.com"
         var text = "Buy " + productName
         text += " at $"
-        text += price + " from link below"
+        text += price + " from link below&hashtag=#CSCI571Spring2019Ebay"
         
         text = text.trimmingCharacters(in: .whitespacesAndNewlines)
         text = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!

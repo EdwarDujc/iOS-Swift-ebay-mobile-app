@@ -270,6 +270,7 @@
                                             <outlet property="shippingLabel" destination="Ig3-bc-R5s" id="bCa-aq-gvN"/>
                                             <outlet property="titleLabel" destination="3i3-qa-js8" id="2EN-bP-jzu"/>
                                             <outlet property="zipcodeLabel" destination="uMm-Vo-RUl" id="jh5-MF-UIl"/>
+                                            <segue destination="dbL-Ry-6DB" kind="show" identifier="wishListToTab" id="jcu-jv-nJn"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -416,7 +417,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HyG-HE-FJk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="rne-Cw-DNa" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1864" y="125"/>
+            <point key="canvasLocation" x="1942" y="875"/>
         </scene>
         <!--shippingTab-->
         <scene sceneID="h3J-UX-rtO">
@@ -953,4 +954,7 @@
         <image name="unchecked" width="50" height="50"/>
         <image name="wishListEmpty" width="22" height="22"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="jcu-jv-nJn"/>
+    </inferredMetricsTieBreakers>
 </document>

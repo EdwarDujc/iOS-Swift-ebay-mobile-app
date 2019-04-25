@@ -83,10 +83,39 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
                 // Get the new view controller using segue.destination.
                 // Pass the selected object to the new view controller.
-                if let vc1 = segue.destination as? SearchResultsTableViewController {
-                    vc1.searchResultsJson = self.searchResultsJson
-                }
+        if let vc1 = segue.destination as? SearchResultsTableViewController {
+            vc1.searchResultsJson = self.searchResultsJson
+        } else if let vc1 = segue.destination as? TabBarViewController {
+            guard let selectedCell = sender as? WishListTableViewCell else {
+                fatalError("Unexpected sender: \(sender)")
             }
+            guard let indexPath = wishListTabelView.indexPath(for: selectedCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            let item = cartItems![cartKeys[indexPath.row]]
+            let id = item!["id"] as! String
+            let title = item!["title"] as! String
+            let price = item!["price"] as! String
+            let shipping = item!["shipping"] as! String
+            let zipcode = item!["zipcode"] as! String
+            let condition = item!["condition"] as! String
+            let galleryURL = item!["photoUrl"] as! String
+            var photo: UIImage?
+            if (galleryURL != "N.A."){
+                let imageUrl = URL(string: galleryURL)!
+                let imageData = try! Data(contentsOf: imageUrl)
+                photo = UIImage(data: imageData) ?? UIImage(named: "defaultImage")
+            } else {
+                photo = UIImage(named: "defaultImage")
+            }
+            let viewUrl = item!["viewUrl"] as! String
+            guard let product = Item(id: id, title: title, price: price, shipping: shipping, zipcode: zipcode, condition: condition, photo: photo!, photoUrl: galleryURL, isInCart: false, viewUrl: viewUrl) else {
+                fatalError("Unable to instantiate product 1")
+            }
+            
+            vc1.product = product
+        }
+    }
     
     func updateTotalPrice(){
         var totalKeyLabelString = "WishList Total(" + String(cartKeys.count)
@@ -355,7 +384,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     // MARK: wish list table
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let row = indexPath.row
-        print("go to detail at row ", row)
+//        print("go to detail at row ", row)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -390,11 +419,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             cartTableViewCell.conditionLabel.text = temp?["condition"] as! String
             
             let imageUrlString = temp?["viewUrl"] as! String
-//            print("imageUrlString", imageUrlString)
             let imageUrl = URL(string: imageUrlString)!
             let imageData = try! Data(contentsOf: imageUrl)
             cartTableViewCell.photoImageView?.image = UIImage(data: imageData) ?? UIImage(named: "defaultImage")
-//            cartTableViewCell.photoImageView?.frame = CGRect(x: 20, y:9, width:90, height:90);
         }
         return cell
     }
@@ -402,7 +429,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let defaults = UserDefaults.standard
-//            var temp=(cartItems[cartKeys[indexPath.row]]!).mutableCopy() as! Dictionary<String,String>;
             let temp = cartItems[cartKeys[indexPath.row]]
             
             let removedTitle = temp!["title"] as! String

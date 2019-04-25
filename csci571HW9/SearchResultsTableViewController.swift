@@ -63,6 +63,7 @@ class SearchResultsTableViewController: UITableViewController, ToastProtocol {
         cell.photoImageView.image = product.photo
         cell.product = product
         cell.messageToast = self
+        cell.myView = self
         
         let defaults = UserDefaults.standard
         if var allObject = defaults.dictionary(forKey: "wishList"){

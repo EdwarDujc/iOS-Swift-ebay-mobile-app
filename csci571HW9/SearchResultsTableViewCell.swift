@@ -23,6 +23,7 @@ class SearchResultsTableViewCell: UITableViewCell {
     var product:Item!
     var messageToast:ToastProtocol!;
     var isInCart = false
+    var myView:SearchResultsTableViewController!
     
     @IBAction func wishButtonAction(_ sender: UIButton) {
         let defaults = UserDefaults.standard
@@ -34,7 +35,7 @@ class SearchResultsTableViewCell: UITableViewCell {
                 var message = product?.title ?? "Unknown product"
                 message += " was removed from the Wish List"
 //                messageToast.message(m:message)
-                print(message)
+                myView.view.makeToast(message, duration: 1.5, position: .bottom)
             } else {
                 allObject[product!.id] = [
                     "id":product!.id,
@@ -53,7 +54,7 @@ class SearchResultsTableViewCell: UITableViewCell {
                 var message = product?.title ?? "Unknown product"
                 message += " was added to the Wish List"
 //                messageToast.message(m:message)
-                print(message)
+                myView.view.makeToast(message, duration: 1.5, position: .bottom)
 
             }
         } else {
@@ -74,7 +75,7 @@ class SearchResultsTableViewCell: UITableViewCell {
             var message = product?.title ?? "Unknown product"
             message += " was added to the Wish List"
 //            messageToast.message(m:message)
-            print(message)
+            myView.view.makeToast(message, duration: 1.5, position: .bottom)
 
         }
     }
