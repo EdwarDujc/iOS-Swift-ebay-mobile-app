@@ -12,8 +12,16 @@ import AlamofireSwiftyJSON
 import SwiftyJSON
 import Toast_Swift
 
-class SearchResultsTableViewController: UITableViewController {
+protocol ToastProtocol {
+    func message(m:String)
+}
+
+class SearchResultsTableViewController: UITableViewController, ToastProtocol {
     
+    func message(m:String){
+        messageToast.message(m: m)
+    }
+    var messageToast:ToastProtocol!;
     var products = [Item]()
     var searchResultsJson:JSON!
 
@@ -21,16 +29,15 @@ class SearchResultsTableViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationController!.navigationBar.topItem!.title = "Product Search"
         loadProducts()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewWillAppear(_ animated: Bool){
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+        
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -54,6 +61,19 @@ class SearchResultsTableViewController: UITableViewController {
         cell.zipcodeLabel.text = product.zipcode
         cell.conditionLabel.text = product.condition
         cell.photoImageView.image = product.photo
+        cell.product = product
+        cell.messageToast = self
+        
+        let defaults = UserDefaults.standard
+        if var allObject = defaults.dictionary(forKey: "wishList"){
+            if let object = allObject[product.id]{
+                cell.wishButton.setImage(UIImage(named: "wishListFilled") , for: UIControl.State.normal)
+            } else {
+                cell.wishButton.setImage(UIImage(named: "wishListEmpty") , for: UIControl.State.normal)
+            }
+        } else {
+            cell.wishButton.setImage(UIImage(named: "wishListEmpty") , for: UIControl.State.normal)
+        }
         
         return cell
     }
@@ -171,12 +191,6 @@ class SearchResultsTableViewController: UITableViewController {
                 condition = "N.A."
             }
             
-            let wishButton = UIButton()
-            wishButton.addTarget(self, action: "pressed", for: .touchUpInside)
-            
-            func pressed(sender: UIButton!) {
-                print("wish button clicked")
-            }
             let viewUrl = item["viewItemURL"][0].string ?? "www.ebay.com"
             
             guard let product = Item(id: id, title: title, price: price, shipping: shipping, zipcode: zipcode, condition: condition, photo: photo!, photoUrl: galleryURL, isInCart: false, viewUrl: galleryURL) else {

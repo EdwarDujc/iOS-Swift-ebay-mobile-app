@@ -101,7 +101,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         if (cartKeys.count) > 0 {
             for index in 0...cartKeys.count-1{
                 totalPrice += Double(cartItems[cartKeys[index]]!["price"] as! String)!
-                print(cartItems[cartKeys[index]]!["price"])
+//                print(cartItems[cartKeys[index]]!["price"])
             }
             totalValueLabel.text = "$" + String(totalPrice)
         }

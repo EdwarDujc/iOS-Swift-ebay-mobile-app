@@ -99,8 +99,6 @@ class TabBarViewController: UITabBarController {
             message += " was added to the Wish List"
             self.view.makeToast(message, duration: 1.5, position: .bottom)
         }
-        
-        
     }
     
     override func viewDidLoad() {

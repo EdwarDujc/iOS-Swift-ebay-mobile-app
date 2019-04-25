@@ -20,16 +20,62 @@ class SearchResultsTableViewCell: UITableViewCell {
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var wishButton: UIButton!
     
+    var product:Item!
+    var messageToast:ToastProtocol!;
     var isInCart = false
     
     @IBAction func wishButtonAction(_ sender: UIButton) {
-//        print("wish button clicked")
-        if (self.isInCart){
-            self.isInCart = false
-            wishButton.setImage(UIImage(named: "wishListEmpty") , for: UIControl.State.normal)
+        let defaults = UserDefaults.standard
+        if var allObject = defaults.dictionary(forKey: "wishList"){
+            if let object = allObject[product!.id]{
+                allObject.removeValue(forKey: product!.id)
+                defaults.set(allObject, forKey: "wishList")
+                wishButton.setImage(UIImage(named: "wishListEmpty") , for: UIControl.State.normal)                // toast message
+                var message = product?.title ?? "Unknown product"
+                message += " was removed from the Wish List"
+//                messageToast.message(m:message)
+                print(message)
+            } else {
+                allObject[product!.id] = [
+                    "id":product!.id,
+                    "title":product!.title,
+                    "price":product!.price,
+                    "shipping":product!.shipping,
+                    "zipcode":product!.zipcode,
+                    "condition":product!.condition,
+                    "photoUrl":product!.photoUrl,
+                    "isIncart":product!.isInCart,
+                    "viewUrl":product!.viewUrl
+                ]
+                defaults.set(allObject, forKey: "wishList")
+                wishButton.setImage(UIImage(named: "wishListFilled") , for: UIControl.State.normal)
+                // toast message
+                var message = product?.title ?? "Unknown product"
+                message += " was added to the Wish List"
+//                messageToast.message(m:message)
+                print(message)
+
+            }
         } else {
-            self.isInCart = true
+            var cart = [product!.id: [
+                "id":product!.id,
+                "title":product!.title,
+                "price":product!.price,
+                "shipping":product!.shipping,
+                "zipcode":product!.zipcode,
+                "condition":product!.condition,
+                "photoUrl":product!.photoUrl,
+                "isIncart":product!.isInCart,
+                "viewUrl":product!.viewUrl
+                ]]
+            defaults.set(cart, forKey: "wishList")
             wishButton.setImage(UIImage(named: "wishListFilled") , for: UIControl.State.normal)
+            // toast message
+            var message = product?.title ?? "Unknown product"
+            message += " was added to the Wish List"
+//            messageToast.message(m:message)
+            print(message)
+
         }
     }
     
