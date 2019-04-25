@@ -12,16 +12,8 @@ import AlamofireSwiftyJSON
 import SwiftyJSON
 import Toast_Swift
 
-protocol ToastProtocol {
-    func message(m:String)
-}
-
-class SearchResultsTableViewController: UITableViewController, ToastProtocol {
+class SearchResultsTableViewController: UITableViewController {
     
-    func message(m:String){
-        messageToast.message(m: m)
-    }
-    var messageToast:ToastProtocol!;
     var products = [Item]()
     var searchResultsJson:JSON!
 
@@ -62,7 +54,6 @@ class SearchResultsTableViewController: UITableViewController, ToastProtocol {
         cell.conditionLabel.text = product.condition
         cell.photoImageView.image = product.photo
         cell.product = product
-        cell.messageToast = self
         cell.myView = self
         
         let defaults = UserDefaults.standard

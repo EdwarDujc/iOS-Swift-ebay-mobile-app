@@ -21,7 +21,6 @@ class SearchResultsTableViewCell: UITableViewCell {
     @IBOutlet weak var wishButton: UIButton!
     
     var product:Item!
-    var messageToast:ToastProtocol!;
     var isInCart = false
     var myView:SearchResultsTableViewController!
     
