@@ -25,14 +25,11 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        print("original itemTitle: ", itemTitle)
         itemTitle = itemTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        print("trimmed itemTitle: ", itemTitle)
-        
-        let url = "http://csci571-jincheng-nodejs.us-east-2.elasticbeanstalk.com/photos?keyword=" + (itemTitle.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
-        
-        print("google url: ", url)
+        itemTitle = (itemTitle.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
+        itemTitle = itemTitle.replacingOccurrences(of: "&", with: "%26")
+        let url = "http://csci571-jincheng-nodejs.us-east-2.elasticbeanstalk.com/photos?keyword=" + itemTitle
+//        print("google url: ", url)
         SwiftSpinner.show("Fetching Google Images...")
         Alamofire.request(URLRequest(url: URL(string: url)! )).responseSwiftyJSON{
             response in

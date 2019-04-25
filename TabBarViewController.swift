@@ -36,7 +36,8 @@ class TabBarViewController: UITabBarController {
     
     @objc func facebookButtonAction(){
         var url = "https://www.facebook.com/sharer/sharer.php?u="
-        let productName = product?.title ?? "Unkonwn Title"
+        var productName = product?.title ?? "Unkonwn Title"
+        productName = productName.replacingOccurrences(of: "&", with: "%26")
         let price = product?.price ?? "Unknown price"
         let link = product?.viewUrl ?? "www.ebay.com"
         var text = "Buy " + productName

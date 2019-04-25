@@ -127,13 +127,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         totalKeyLabel.text = totalKeyLabelString
         
         var totalPrice = 0.0
-        if (cartKeys.count) > 0 {
+        if (cartKeys.count > 0){
             for index in 0...cartKeys.count-1{
                 totalPrice += Double(cartItems[cartKeys[index]]!["price"] as! String)!
 //                print(cartItems[cartKeys[index]]!["price"])
             }
-            totalValueLabel.text = "$" + String(totalPrice)
         }
+        totalValueLabel.text = "$" + String(totalPrice)
     }
     
     override func viewDidLoad() {
@@ -276,7 +276,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         var url = "http://csci571-jincheng-nodejs.us-east-2.elasticbeanstalk.com/search?"
         // keyword
         url = url + "keyword=";
-        url = url + (keyword.text!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))!
+        
+        var keywordString = keyword.text!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        
+        keywordString = keywordString.replacingOccurrences(of: "&", with: "%26")
+        
+        url = url + keywordString
         // category
         url = url + "&category="
         switch category.text {
@@ -348,7 +353,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         url += "&userZipcode="
         url += userZipcode.text!
         
-//        print(url)
+//        print("search url: ", url)
         SwiftSpinner.show("Searching...")
         Alamofire.request(URLRequest(url: URL(string: url)! )).responseSwiftyJSON{
             response in
@@ -418,7 +423,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             cartTableViewCell.zipcodeLabel.text = temp?["zipcode"] as! String
             cartTableViewCell.conditionLabel.text = temp?["condition"] as! String
             
-            let imageUrlString = temp?["viewUrl"] as! String
+            let imageUrlString = temp?["photoUrl"] as! String
             let imageUrl = URL(string: imageUrlString)!
             let imageData = try! Data(contentsOf: imageUrl)
             cartTableViewCell.photoImageView?.image = UIImage(data: imageData) ?? UIImage(named: "defaultImage")
@@ -467,8 +472,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             cartKeys=[]
             
         }
-        wishListTabelView.reloadData()
         updateTotalPrice()
+        wishListTabelView.reloadData()
     }
     
 }
