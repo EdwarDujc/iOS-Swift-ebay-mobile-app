@@ -415,7 +415,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="ruO-xy-tgn"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="rne-Cw-DNa" kind="unwind" identifier="unwindSegueToVC1" unwindAction="unwindToVC1WithSegue:" id="YuL-G3-QEg"/>
+                        <segue destination="rne-Cw-DNa" kind="unwind" identifier="unwindToMain" unwindAction="unwindToMenuWithSegue:" id="eoD-me-rOq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HyG-HE-FJk" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -35,6 +35,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     @IBOutlet weak var totalValueLabel: UILabel!
     @IBOutlet weak var emptyWishListLabel: UILabel!
     
+    @IBAction func unwindToMenu(segue: UIStoryboardSegue) {}
+
     
     //MARK: properties
     var condNewChecked = false
@@ -160,9 +162,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         }
         
         updateTotalPrice()
-        
-        // TEST ONLY! REMOVE!
-        self.keyword.text = "iphone"
         
         // Category
         let mcInputView = McPicker(data: category_option)

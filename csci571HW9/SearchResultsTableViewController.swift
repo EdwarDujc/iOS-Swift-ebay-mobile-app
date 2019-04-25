@@ -16,7 +16,7 @@ class SearchResultsTableViewController: UITableViewController {
     
     var products = [Item]()
     var searchResultsJson:JSON!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController!.navigationBar.topItem!.title = "Product Search"
@@ -198,7 +198,7 @@ class SearchResultsTableViewController: UITableViewController {
         let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
         
         // add an action (button)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in self.performSegue(withIdentifier: "unwindSegueToVC1", sender: nil)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in self.performSegue(withIdentifier: "unwindToMain", sender: nil)
         }))
         // show the alert
         self.present(alert, animated: true, completion: nil)
