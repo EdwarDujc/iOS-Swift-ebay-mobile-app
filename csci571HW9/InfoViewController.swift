@@ -52,7 +52,7 @@ class InfoViewController: UIViewController, UIScrollViewDelegate, UITableViewDat
                     self.descriptionTableView.reloadData()
                 }
                 // description table
-                for index in 0...self.detailsJson["Item"]["ItemSpecifics"]["NameValueList"].count - 1 {
+                for index in 0..<self.detailsJson["Item"]["ItemSpecifics"]["NameValueList"].count {
                     let pair = self.detailsJson["Item"]["ItemSpecifics"]["NameValueList"][index]
                     let name = pair["Name"].string ?? "N.A."
                     let value = pair["Value"][0].string ?? "N.A."
@@ -60,10 +60,10 @@ class InfoViewController: UIViewController, UIScrollViewDelegate, UITableViewDat
                 }
                 
                 // photo scroll
-                for index in 0...result["Item"]["PictureURL"].count - 1 {
-                    let picUrl = result["Item"]["PictureURL"][index].string ?? ""
-                    self.images.append(picUrl)
-                }
+                    for index in 0..<result["Item"]["PictureURL"].count {
+                        let picUrl = result["Item"]["PictureURL"][index].string ?? ""
+                        self.images.append(picUrl)
+                    }
                 
                 self.pageControl.numberOfPages = self.images.count
                 for index in 0..<self.images.count {

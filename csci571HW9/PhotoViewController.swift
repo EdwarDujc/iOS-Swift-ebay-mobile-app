@@ -35,7 +35,7 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
             response in
             SwiftSpinner.hide()
             if let result = response.result.value {
-                for index in 0...result["items"].count - 1 {
+                for index in 0..<result["items"].count{
                     let picUrl = result["items"][index]["link"].string ?? ""
                     self.images.append(picUrl)
                 }
