@@ -139,9 +139,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     }
     
     override func viewDidLoad() {
-        
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: Selector("endEditing:")))
-        
         searchView.isHidden = false
         wishListTabelView.isHidden = true
         totalKeyLabel.isHidden = true

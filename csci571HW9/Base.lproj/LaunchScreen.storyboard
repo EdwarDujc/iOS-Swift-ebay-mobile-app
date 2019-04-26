@@ -18,11 +18,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="trojan" translatesAutoresizingMaskIntoConstraints="NO" id="jvr-6V-RAF">
-                                <rect key="frame" x="109" y="275" width="196" height="235"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trojan" translatesAutoresizingMaskIntoConstraints="NO" id="jvr-6V-RAF">
+                                <rect key="frame" x="109" y="259" width="196" height="264"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="264" id="OWQ-yY-GiY"/>
+                                    <constraint firstAttribute="width" constant="196" id="iUZ-tT-aPn"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Doe-s6-BYm">
-                                <rect key="frame" x="130" y="518" width="154" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Doe-s6-BYm">
+                                <rect key="frame" x="109" y="531" width="196" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.46209198236465454" green="0.17255464196205139" blue="0.25485712289810181" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -30,11 +34,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="jvr-6V-RAF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="109" id="E1J-Jg-hL4"/>
-                            <constraint firstItem="Doe-s6-BYm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="130" id="Gc7-0O-Pb9"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Doe-s6-BYm" secondAttribute="trailing" constant="130" id="VSN-aT-yaf"/>
-                            <constraint firstItem="Doe-s6-BYm" firstAttribute="top" secondItem="jvr-6V-RAF" secondAttribute="bottom" constant="8" id="VpU-Fj-qSL"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jvr-6V-RAF" secondAttribute="trailing" constant="109" id="mbM-0Y-NVK"/>
+                            <constraint firstItem="jvr-6V-RAF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="215" id="AQR-Lz-jtz"/>
+                            <constraint firstItem="jvr-6V-RAF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="109" id="Ie1-h9-1L3"/>
+                            <constraint firstItem="Doe-s6-BYm" firstAttribute="top" secondItem="jvr-6V-RAF" secondAttribute="bottom" constant="8" id="P9a-3g-chK"/>
+                            <constraint firstItem="Doe-s6-BYm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="109" id="qJP-lI-7uz"/>
+                            <constraint firstAttribute="trailing" secondItem="jvr-6V-RAF" secondAttribute="trailing" constant="109" id="qm5-xu-AIq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Doe-s6-BYm" secondAttribute="trailing" constant="109" id="wdE-m1-Nki"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
