@@ -388,7 +388,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     // MARK: wish list table
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let row = indexPath.row
-//        print("go to detail at row ", row)
+        print("go to detail at row ", row)
+        self.performSegue(withIdentifier: "wishListToTab", sender: self)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -90,8 +90,8 @@ class SimilarViewController: UIViewController, UICollectionViewDelegate, UIColle
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
-                for index in 0...result["getSimilarItemsResponse"]["itemRecommendations"
-                    ]["item"].count-1{
+                for index in 0..<result["getSimilarItemsResponse"]["itemRecommendations"
+                    ]["item"].count{
                         let itemResult = result["getSimilarItemsResponse"]["itemRecommendations"
                             ]["item"][index]
                         var tmpItem:JSON = [

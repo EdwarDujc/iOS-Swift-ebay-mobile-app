@@ -52,7 +52,7 @@ class InfoViewController: UIViewController, UIScrollViewDelegate, UITableViewDat
                     self.descriptionTableView.reloadData()
                 }
                 // description table
-                for index in 0...self.detailsJson["Item"]["ItemSpecifics"]["NameValueList"].count - 1 {
+                for index in 0..<self.detailsJson["Item"]["ItemSpecifics"]["NameValueList"].count{
                     let pair = self.detailsJson["Item"]["ItemSpecifics"]["NameValueList"][index]
                     let name = pair["Name"].string ?? "N.A."
                     let value = pair["Value"][0].string ?? "N.A."
