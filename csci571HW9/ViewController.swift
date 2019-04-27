@@ -138,8 +138,17 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         totalValueLabel.text = "$" + String(totalPrice)
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     override func viewDidLoad() {
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: Selector("endEditing:")))
+        
+        self.keyword.delegate = self
+        self.userZipcode.delegate = self
+        self.distance.delegate = self
+//        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: Selector("endEditing:")))
         searchView.isHidden = false
         wishListTabelView.isHidden = true
         totalKeyLabel.isHidden = true
@@ -386,11 +395,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     }
     
     // MARK: wish list table
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        let row = indexPath.row
-        print("go to detail at row ", row)
-        self.performSegue(withIdentifier: "wishListToTab", sender: self)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+//        let row = indexPath.row
+//        print("go to detail at row ", row)
+//        self.performSegue(withIdentifier: "wishListToTab", sender: self)
+//    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

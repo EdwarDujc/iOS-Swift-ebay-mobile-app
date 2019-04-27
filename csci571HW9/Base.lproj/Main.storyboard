@@ -226,7 +226,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PRADA New Sunglasses Cat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3i3-qa-js8">
-                                                    <rect key="frame" x="113" y="10" width="264" height="21"/>
+                                                    <rect key="frame" x="113" y="10" width="247" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                     <nil key="textColor"/>
@@ -269,7 +269,7 @@
                                             <outlet property="shippingLabel" destination="Ig3-bc-R5s" id="bCa-aq-gvN"/>
                                             <outlet property="titleLabel" destination="3i3-qa-js8" id="2EN-bP-jzu"/>
                                             <outlet property="zipcodeLabel" destination="uMm-Vo-RUl" id="jh5-MF-UIl"/>
-                                            <segue destination="dbL-Ry-6DB" kind="show" identifier="wishListToTab" id="Djz-9R-srV"/>
+                                            <segue destination="dbL-Ry-6DB" kind="show" identifier="wishToTab" id="Uel-Cx-H0l"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -963,6 +963,6 @@
         <image name="wishListEmpty" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Djz-9R-srV"/>
+        <segue reference="Uel-Cx-H0l"/>
     </inferredMetricsTieBreakers>
 </document>
