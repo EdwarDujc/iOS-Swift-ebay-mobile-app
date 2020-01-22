@@ -7,26 +7,26 @@
 
 ## Features
 ### Search Form
-![](https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/search-1.gif)
-![](https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/search-2.gif)
-![](https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/search-3.gif)
+<img src="https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/search-1.gif" width="400" />
+<img src="https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/search-2.gif" width="400" />
+<img src="https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/search-3.gif" width="400" />
 
 ### Detail - Product
-![](https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/product.gif)
+<img src="https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/product.gif" width="400" />
 
 ### Detail - Photos
-![](https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/photos-1.gif)
-![](https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/photos-2.gif)
+<img src="https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/photos-1.gif" width="400" />
+<img src="https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/photos-2.gif" width="400" />
 
 ### Detail - Shipping
-![](https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/shipping.gif)
+<img src="https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/shipping.gif" width="400" />
 
 ### Detail - Similar Products
-![](https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/similar-1.gif)
-![](https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/similar-2.gif)
+<img src="https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/similar-1.gif" width="400" />
+<img src="https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/similar-2.gif" width="400" />
 
 ### Facebook Sharing
-![](https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/facebook.gif)
+<img src="https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/facebook.gif" width="400" />
 
 ### Wish List
-![](https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/wish.gif)
+<img src="https://github.com/EdwarDujc/csci571HW9/blob/master/screenshots/wish.gif" width="400" />
